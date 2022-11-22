@@ -1,0 +1,996 @@
+<!-- ------------------------------------------------------------------------- -->
+<!-- APP IS READY WRAPPER -->
+<!-- ------------------------------------------------------------------------- -->
+<div #compzAppWrap *ngIf="appSStates!==null" class="app-is-ready-wrapper">
+<!-- ------------------------------------------------------------------------- -->
+<!-- APP TITLE BAR -->
+<!-- ------------------------------------------------------------------------- -->
+  <div #mscwapptitlebar (mouseenter)="mscwMouseEnter('mscwapptitlebar')" (click)="mscwMouseClick()" id="mscwapptitlebar" class="compz-mainsection-corewrapper apptitlebar">
+    <ion-grid class="compz-page-titlebar-grid home">
+      <ion-row class="compz-page-titlebar-row home">
+        <ion-col class="compz-page-titlebar-col home logo-col">
+          <div class="compz-page-titlebar-logo-wrapper">
+            <img src="assets/clogo.png" class="compz-page-titlebar-logo-img">
+          </div>
+        </ion-col>
+        <ion-col class="compz-page-titlebar-col home menu-col">
+          <div class="compz-titlebar-menu outter-wrapper">
+            <div #wrapMMDD class="compz-titlebar-menu inner-wrapper">
+              <div class="compz-titlebar-menu-ddwrap file-ddwrap">
+                <div #fileMMDD tabindex="1" (keydown)="menuBarDDKey($event,'file')" (mouseenter)="menuBarDDMouse('enter','file')" (mouseleave)="menuBarDDMouse('leave','file')" (click)="menuBarDDClick('file')" [ngClass]="{'mmdd-hover':mmDDHovered==='file','dd-is-open':mmDDOpen==='file'}" class="compz-titlebar-menu-dd outter-wrapper file"><div class="compz-titlebar-menu-dd inner-wrapper file"><div class="compz-titlebar-menu-dd textlabel file"><span [ngClass]="{'mmdd-alt-uline':mmDDAltHL}" class="mmdd-alt-uline">F</span>ile</div></div></div>
+              </div>
+              <div class="compz-titlebar-menu-ddwrap edit-ddwrap">
+                <div #editMMDD tabindex="2" (keydown)="menuBarDDKey($event,'edit')" (mouseenter)="menuBarDDMouse('enter','edit')" (mouseleave)="menuBarDDMouse('leave','edit')" (click)="menuBarDDClick('edit')" [ngClass]="{'mmdd-hover':mmDDHovered==='edit','dd-is-open':mmDDOpen==='edit'}" class="compz-titlebar-menu-dd outter-wrapper edit"><div class="compz-titlebar-menu-dd inner-wrapper edit"><div class="compz-titlebar-menu-dd textlabel edit"><span [ngClass]="{'mmdd-alt-uline':mmDDAltHL}" class="mmdd-alt-uline">E</span>dit</div></div></div>
+              </div>
+              <div class="compz-titlebar-menu-ddwrap tools-ddwrap">
+                <div #toolsMMDD tabindex="3" (keydown)="menuBarDDKey($event,'tools')" (mouseenter)="menuBarDDMouse('enter','tools')" (mouseleave)="menuBarDDMouse('leave','tools')" (click)="menuBarDDClick('tools')" [ngClass]="{'mmdd-hover':mmDDHovered==='tools','dd-is-open':mmDDOpen==='tools'}" class="compz-titlebar-menu-dd outter-wrapper tools"><div class="compz-titlebar-menu-dd inner-wrapper tools"><div class="compz-titlebar-menu-dd textlabel tools"><span [ngClass]="{'mmdd-alt-uline':mmDDAltHL}" class="mmdd-alt-uline">T</span>ools</div></div></div>
+              </div>
+              <div class="compz-titlebar-menu-ddwrap window-ddwrap">
+                <div #windowMMDD tabindex="4" (keydown)="menuBarDDKey($event,'window')" (mouseenter)="menuBarDDMouse('enter','window')" (mouseleave)="menuBarDDMouse('leave','window')" (click)="menuBarDDClick('window')" [ngClass]="{'mmdd-hover':mmDDHovered==='window','dd-is-open':mmDDOpen==='window'}" class="compz-titlebar-menu-dd outter-wrapper window"><div class="compz-titlebar-menu-dd inner-wrapper window"><div class="compz-titlebar-menu-dd textlabel window"><span [ngClass]="{'mmdd-alt-uline':mmDDAltHL}" class="mmdd-alt-uline">W</span>indow</div></div></div>
+              </div>
+              <div class="compz-titlebar-menu-ddwrap help-ddwrap">
+                <div #helpMMDD tabindex="5" (keydown)="menuBarDDKey($event,'help')" (mouseenter)="menuBarDDMouse('enter','help')" (mouseleave)="menuBarDDMouse('leave','help')" (click)="menuBarDDClick('help')" [ngClass]="{'mmdd-hover':mmDDHovered==='help','dd-is-open':mmDDOpen==='help'}" class="compz-titlebar-menu-dd outter-wrapper help"><div class="compz-titlebar-menu-dd inner-wrapper help"><div class="compz-titlebar-menu-dd textlabel help"><span [ngClass]="{'mmdd-alt-uline':mmDDAltHL}" class="mmdd-alt-uline">H</span>elp</div></div></div>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col class="compz-page-titlebar-col btns-col">
+          <div class="compz-winctrlbtns-outter-wrapper">
+            <div class="compz-winctrlbtns-inner-wrapper">
+              <div (click)="winBtnEvents('tray')" class="compz-winctrlbtn tray"><img src="assets/compz-win-tray.png" class="compz-winctrlbtn-img"></div>
+              <div (click)="winBtnEvents('min')" class="compz-winctrlbtn min"><img src="assets/compz-win-min.png" class="compz-winctrlbtn-img"></div>
+              <div *ngIf="!appSStates.isMaxed" (click)="winBtnEvents('max')" class="compz-winctrlbtn max"><img src="assets/compz-win-max.png" class="compz-winctrlbtn-img"></div>
+              <div *ngIf="appSStates.isMaxed" (click)="winBtnEvents('restore')" class="compz-winctrlbtn res"><img src="assets/compz-win-restore.png" class="compz-winctrlbtn-img"></div>
+              <div (click)="winBtnEvents('close')" class="compz-winctrlbtn close"><img src="assets/compz-win-close.png" class="compz-winctrlbtn-img"></div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="compz-page-titlebar-text">
+      <div class="compz-titlebar-text-appname">
+        comp<span class="compztbtxt-0">0</span>z<span class="compztbtxt-1">1</span>te
+      </div>
+      <div *ngIf="appProject||(compzRoute!==null&&compzRoute.length>0)" class="compz-titlebar-text-projectname">
+        <span class="compztbtxt-projhyphen">-</span>
+        <span class="compztbtxt-projbrack l">[</span>
+        <span *ngIf="appProject" class="compztbtxt-projname">{{appProject.projectName}}</span>
+        <span *ngIf="appProject&&(compzRoute!==null&&compzRoute.length>0)" class="compztbtxt-projdash">|</span>
+        <span *ngIf="compzRoute!==null&&compzRoute.length>0" class="compztbtxt-projroute">{{compzRoute}}</span>
+        <span class="compztbtxt-projbrack r">]</span>
+      </div>
+    </div>
+  </div>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- APP CONTENT -->
+  <!-- ------------------------------------------------------------------------- -->
+  <div id="main" class="compz-app-main-panel-outter-wrapper">
+    <ion-grid class="compz-grid compz-app-main-panel-grid">
+      <ion-row class="compz-grid compz-app-main-panel-row">
+        <ion-col class="compz-grid compz-app-main-panel-col content-col">
+          <!-- ///////////////////////////////////////////////////////////////////////// -->
+          <div #mscwapphome (mouseenter)="mscwMouseEnter('mscwapphome')" (click)="mscwMouseClick()" id="mscwapphome" class="compz-mainsection-corewrapper apphome">
+            <ion-router-outlet>
+              <div class="compz-app-homecontent-outter-wrapper"></div>
+            </ion-router-outlet>
+          </div>
+          <!-- ///////////////////////////////////////////////////////////////////////// -->
+        </ion-col>
+        <ion-col [ngClass]="{'fepanel-closed':!appSStates.feIsOpen}" class="compz-grid compz-app-main-panel-col fe-col">
+          <!-- ------------------------------------------------------------------------- -->
+          <!-- APP FILE EXPLORER -->
+          <!-- ------------------------------------------------------------------------- -->
+          <div #mscwappfileexplorer (mouseenter)="mscwMouseEnter('mscwappfileexplorer')" (click)="mscwMouseClick()" id="mscwappfileexplorer" class="compz-file-explorer-main-outter-wrapper">
+            <div (click)="tabCloseFE()" class="fe-col-close-tab-wrapper"></div>
+            <div *ngIf="this.appSStates.feTreeAudio&&this.appSStates.feTreeSubs&&this.appSStates.feTreeVideo" class="compz-file-explorer-main-inner-wrapper">
+              <!-- PROJECTFILES HEADER -------------------->
+              <div class="fe-base-dir-header default projectfiles">
+                <div class="fe-base-dir-header-label default projectfileslabel">
+                  <ion-grid class="fe-projectfiles-header-grid">
+                    <ion-row class="fe-projectfiles-header-row">
+                      <ion-col class="fe-projectfiles-header-col icolabel-col">
+                        <div class="fe-base-dir-header-label-showhide-ico default">
+                          <div class="fe-base-dir-header-label-txt projectfiles-label">files</div>
+                        </div>
+                      </ion-col>
+                      <ion-col class="fe-projectfiles-header-col dataall-col">
+                        <div class="fe-projectfiles-datastats-inner-wrapper">
+                          <div class="fe-projectfiles-datastats-count-wrap">{{appSStates.feDataStats.all.count.file}}<span class="fe-projectfiles-datastats-slash">/</span>{{appSStates.feDataStats.all.count.dir}}</div>
+                          <div class="fe-projectfiles-datastats-pipe">|</div>
+                          <div class="fe-projectfiles-datastats-size-wrapper"><span class="fe-projectfiles-datastats-sizeno">{{appSStates.feDataStats.all.size.no}}</span><span class="fe-projectfiles-datastats-size-suffix">{{appSStates.feDataStats.all.size.suffix}}</span></div>
+                        </div>
+                      </ion-col>
+                      <ion-col class="fe-projectfiles-header-col arrangewin-col">
+                        <ion-button (click)="fileExpFns('togglewin',null)" class="fe-projectfiles-header-btn arrangewin-btn">
+                          <img *ngIf="appSStates.feArrangeWin==='combined'" class="fe-projectfiles-btn-ico arrangewin-ico" src="assets/fe-base-projectfiles-equaldirs.png">
+                          <img *ngIf="appSStates.feArrangeWin==='equal'" class="fe-projectfiles-btn-ico arrangewin-ico close" src="assets/fe-base-projectfiles-combineddirs.png">
+                        </ion-button>
+                      </ion-col>
+                      <ion-col class="fe-projectfiles-header-col searchall-col">
+                        <ion-button (click)="fileExpFns('togglesearch',null)" class="fe-projectfiles-header-btn searchall-btn">
+                          <img *ngIf="!appSStates.feSearch.feShowSearch" class="fe-projectfiles-btn-ico searchall-ico" src="assets/fe-base-projectfiles-search.png">
+                          <img *ngIf="appSStates.feSearch.feShowSearch" class="fe-projectfiles-btn-ico searchall-ico close" src="assets/fe-base-projectfiles-searchclose.png">
+                        </ion-button>
+                      </ion-col>
+                      <ion-col class="fe-projectfiles-header-col refreshall-col">
+                        <ion-button [disabled]="feIsRefresh.all" (click)="fileExpFns('sync',['audio','subs','video'])" class="fe-projectfiles-header-btn refreshall-btn">
+                          <img class="fe-projectfiles-btn-ico refreshall-ico" src="assets/fe-base-projectfiles-refreshall.png">
+                        </ion-button>
+                      </ion-col>
+                      <ion-col class="fe-projectfiles-header-col collexpall-col">
+                        <ion-button class="fe-projectfiles-header-btn collexpall-btn">
+                          <div *ngIf="appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]||appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]||appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]" (click)="fileExpFns('collapseall',{bdir:'all'})" class="fe-projectfiles-header-btn-wrap collapseall">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-projectfiles-ico collapseall" src="assets/fe-base-projectfiles-collapseall.png"></div>
+                          </div>
+                          <div *ngIf="!appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]&&!appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]&&!appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]" (click)="fileExpFns('expandall',{bdir:'all'})" class="fe-projectfiles-header-btn-wrap expandall">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-projectfiles-ico expandall" src="assets/fe-base-projectfiles-expandall.png"></div>
+                          </div>
+                        </ion-button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+              </div>
+              <!-- SEARCH ---------------------------------->
+              <div [ngClass]="{'febasesearch-show':appSStates.feSearch.feShowSearch}" class="compz-fe-base-search-wrapper audio">
+                <ion-grid class="compz-grid compz-fe-base-search-grid audio">
+                  <ion-row class="compz-row compz-fe-base-search-row audio input-row">
+                    <ion-col class="compz-col compz-fe-base-search-col audio search-targetdirs-col">
+                      <ng-multiselect-dropdown *ngIf="appSStates.feSearch.feShowSearch" class="fe-searchtarget-ddselect" #feSTDSelect [placeholder]="''" [settings]="appSStates.feSearch.tdData.feSearchTDOpts" [data]="appSStates.feSearch.tdData.feSearchTDAll" [(ngModel)]="appSStates.feSearch.tdData.feSearchTDsTrue" (onDropDownClose)="feSearchEvent('tdfinish',$event,feSTDSelect.data)" (onSelect)="feSearchEvent('tdchange',$event,null)">
+                      </ng-multiselect-dropdown>
+                      <div class="fe-search-targetdirs-active-indic">
+                        <div class="fe-targetdd-selected-indic vals-txt">
+                          <div class="fe-search-targetdir-indic outter-wrapper">
+                            <div class="fe-search-targetdir-indic inner-wrapper">
+                              <div [ngClass]="{'tdindic-on':appSStates.feSearch.tdData.feSearchTDIndic.audio,'tdindic-off':!appSStates.feSearch.tdData.feSearchTDIndic.audio}" class="tdindic-txt letter audio">A</div>
+                              <div class="tdindic-split">|</div>
+                              <div [ngClass]="{'tdindic-on':appSStates.feSearch.tdData.feSearchTDIndic.subs,'tdindic-off':!appSStates.feSearch.tdData.feSearchTDIndic.subs}" class="tdindic-txt letter subs">S</div>
+                              <div class="tdindic-split">|</div>
+                              <div [ngClass]="{'tdindic-on':appSStates.feSearch.tdData.feSearchTDIndic.video,'tdindic-off':!appSStates.feSearch.tdData.feSearchTDIndic.video}" class="tdindic-txt letter video">V</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ion-col>
+                    <ion-col class="compz-col compz-fe-base-search-col audio search-input-col">
+                      <input class="compz-fe-base-search-input" ngModel #feSearchInput (keydown)="feSearchEvent('keydown',$event,feSearchInput.value)" (keyup)="feSearchEvent('keyup',$event,feSearchInput.value)">
+                    </ion-col>
+                    <ion-col class="compz-col compz-fe-base-search-col audio close-search-btn-col">
+                      <div (click)="feSearchEvent('clear',$event,feSearchInput.value)" class="base-search-clear-input-btn-wrapper audio">
+                        <img *ngIf="feSearchInput.value.length>0" class="base-search-clear-input-ico audio clear" src="assets/fe-base-search-clearinput.png">
+                        <img *ngIf="feSearchInput.value.length<1" class="base-search-clear-input-ico audio more" src="assets/fe-base-search-more.png">
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="compz-row compz-fe-base-search-row audio matchstats-row">
+                    <ion-col size="6" class="compz-col compz-fe-base-search-col audio search-matchstat-col resultcounts-col">
+                      <div class="compz-fe-base-search-matchstat-outter-wrapper resultcounts">
+                        <div [ngStyle]="{'display':feSearchInput.value.length<1?'flex':'none'}" class="matchcount nores noinput"><div class="loader">Start typing<span class="loader__dot">.</span><span class="loader__dot">.</span><span class="loader__dot">.</span></div></div>
+                        <div *ngIf="appSStates.feSearch.feSearchMatchData!==null" class="matchstat-resultcounts matchcount-wrapper">
+                          <div [ngStyle]="{'display':feSearchInput.value.length>0&&appSStates.feSearch.feSearchMatchData!==null&&appSStates.feSearch.feSearchMatchData.match.total<1?'flex':'none'}"  class="matchcount nores nomatch">No matches found</div>
+                          <div [ngStyle]="{'display':feSearchInput.value.length>0&&appSStates.feSearch.feSearchMatchData!==null&&appSStates.feSearch.feSearchMatchData.match.total>0?'flex':'none'}" class="matchcount hasmatch">
+                            <div class="matchcount-resultnos-outter-wrapper">
+                              <span [ngClass]="{'sresulttotals-filterout':appSStates.feSearch.filterData.feAFCount>0}" class="matchcount hasmatch total">{{appSStates.feSearch.feSearchMatchData.match.total}}</span><span *ngIf="appSStates.feSearch.filterData.feAFCount>0" class="matchcount hasmatch lessfiltered">{{(appSStates.feSearch.feSearchMatchData.match.total-appSStates.feSearch.filterData.feAFCount)}}</span><span class="matchcount hasmatch corelabel">Matches</span><span [ngStyle]="{'display':appSStates.feSearch.filterData.feAFCount>0?'none':'block'}" class="matchcount hasmatch sublabel"><span class="matchcount sublabel sublabel brack">(</span><span class="matchcount sublabel data">{{appSStates.feSearch.feSearchMatchData.match.file}}<span class="matchcount sublabel data hyphen">-</span>{{appSStates.feSearch.feSearchMatchData.match.dir}}</span><span class="matchcount sublabel sublabel brack">)</span></span>
+                            </div>
+                            <div [ngStyle]="{'display':appSStates.feSearch.filterData.feHasActiveFilters?'flex':'none'}" class="matchcount hasactivefilters">
+                              <img src="assets/fe-base-search-filterwarn.png" class="fe-search-hasfilt-ico">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ion-col>
+                    <ion-col size="6" class="compz-col compz-fe-base-search-col audio search-matchstat-col resultfilter-col">
+                      <div *ngIf="appSStates.feSearch.filterData.feSearchFilters.length>0" class="compz-fe-base-search-matchstat-outter-wrapper resultfilter">
+                        <ion-button *ngFor="let sf of appSStates.feSearch.filterData.feSearchFilters; index as sfi" (click)="feSearchEvent('filter',$event,sf)" [ngClass]="{'sresult-filterout':appSStates.feSearch.filterData.feFilterOut[sf.ext].hide}" class="compz-btn searchresultsfilter-btn sfbtn-{{sfi}}">
+                          <div *ngIf="sf.ext==='file'" class="searchfilter-btn-label sfbtn-label-{{sfi}}">File</div>
+                          <div *ngIf="sf.ext==='folder'" class="searchfilter-btn-label sfbtn-label-{{sfi}}">Dir</div>
+                          <div *ngIf="sf.ext!=='file'&&sf.ext!=='folder'" class="searchfilter-btn-label sfbtn-label-{{sfi}}">{{sf.ext}}</div>
+                        </ion-button>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+              <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchInProg" class="compz-fe-search-inprog-spinner-wrapper">
+                <div class="fe-search-inprog-inner-wrapper">
+                  <div class="fe-search-inprog-loader">
+                    <div class="fe-search-inprog-bar bar-1"></div>
+                    <div class="fe-search-inprog-bar bar-2"></div>
+                    <div class="fe-search-inprog-bar bar-3"></div>
+                    <div class="fe-search-inprog-bar bar-4"></div>
+                    <div class="fe-search-inprog-bar bar-5"></div>
+                    <div class="fe-search-inprog-bar bar-6"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- FE LIST START ------------------------------->
+              <div class="compz-file-explorer-list-wrapper">
+                <div [ngClass]="{'fe-arrangewin-equal-stack':appSStates.feArrangeWin==='equal','fe-arrangewin-combined-stack':appSStates.feArrangeWin==='combined'}" class="compz-file-explorer-stack-wrapper">
+  <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- ////////////////////////////////////////////////[  A U D I O  ]///////////////////////////////////////////////////////// -->
+  <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                  <div *ngIf="appSStates.feTreeAudio" class="fe-base-dir-section default audio-dir audio-stack-block">
+                    <!-- AUDIO HEADER -------------------->
+                    <div *ngIf="!appSStates.feSearch.tdData.feSearchHideBlock.audio" class="fe-base-dir-header default audio-dir">
+                      <div class="fe-base-dir-header-label default">
+                        <div (click)="fileExpFns('toggledir',{bdir:'audio',path:this.appSStates.feTreeAudio.path})" class="fe-showhide-dir-wrap">
+                          <div class="fe-base-dir-header-label-showhide-ico default">
+                            <img *ngIf="appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]" class="fe-ico showhidearrow showing" src="assets/fe-base-arrow-open.png">
+                            <img *ngIf="!appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]" class="fe-ico showhidearrow hiding" src="assets/fe-base-arrow-close.png">
+                          </div>
+                          <div [ngStyle]="{'color':appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]?'#878787':'#565656'}" class="fe-base-dir-header-label-txt">{{appSStates.feTreeAudio.name}}</div>
+                        </div>
+                        <div class="fe-action-btns-container-wrap">
+                          <div (click)="fileExpFns('sync',['audio'])" class="fe-basedir-actionbtn-wrap sync">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-basedir-actionbtn-ico sync" src="assets/fe-base-sync.png"></div>
+                          </div>
+                          <div (click)="fileExpFns('addfile',{bdir:'audio'})" class="fe-basedir-actionbtn-wrap addfile">
+                            <div class="fe-action-btn-ico-wrap addfile"><img [ngClass]="{'do-prompt-hl':fePromptAddFile}" class="fe-basedir-actionbtn-ico addfile" src="assets/fe-base-addfile-ico.png"></div>
+                          </div>
+                          <div *ngIf="appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]" (click)="fileExpFns('collapseall',{bdir:'audio'})" class="fe-basedir-actionbtn-wrap collapseall">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-basedir-actionbtn-ico collapseall" src="assets/fe-base-arrow-collapseall.png"></div>
+                          </div>
+                          <div *ngIf="!appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]" (click)="fileExpFns('expandall',{bdir:'audio'})" class="fe-basedir-actionbtn-wrap collapseall">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-basedir-actionbtn-ico expandall" src="assets/fe-base-arrow-collapseall.png"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- DIR DATA STATS -------------------------->
+                    <div *ngIf="appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]&&!appSStates.feSearch.feShowSearch" class="fe-base-dir-datastats-wrapper audio">
+                      <ion-grid class="fe-base-dir-datastats-grid audio">
+                        <ion-row class="fe-base-dir-datastats-row audio">
+                          <ion-col size="8" class="fe-base-dir-datastats-col audio order-col">
+                            <div class="fe-base-dir-datastats sortorder-wrapper">
+                              <div class="compz-base-order-label-txt">Order:</div>
+                              <ion-button (click)="fileExpFns('order',{bdir:'audio',type:'by',dir:'prev'})" class="compz-btn datastats-btn datastats-sortorder-btn prev">
+                                <img class="compz-btn-ico datastats-ico datastats-sortorder-ico prev" src="assets/fe-base-sortorder-prev.png">
+                              </ion-button>
+                              <input type="text" #feAudioSortByInput value={{appSStates.feItemOrder.audio.by}} class="datastats-sortorder-value-label">
+                              <ion-button (click)="fileExpFns('order',{bdir:'audio',type:'by',dir:'next'})" class="compz-btn datastats-btn datastats-sortorder-btn next">
+                                <img class="compz-btn-ico datastats-ico datastats-sortorder-ico next" src="assets/fe-base-sortorder-next.png">
+                              </ion-button>
+                            </div>
+                            <div class="fe-base-dir-datastats sortdir-wrapper">
+                              <ion-button (click)="fileExpFns('order',{bdir:'audio',type:'dir',value:'toggle'})" class="compz-btn datastats-btn datastats-sortdir-btn asc">
+                                <img *ngIf="appSStates.feItemOrder.audio.dir==='asc'" class="compz-btn-ico datastats-ico datastats-sortdir-ico desc" src="assets/fe-base-sortdir-asc.png">
+                                <img *ngIf="appSStates.feItemOrder.audio.dir==='desc'" class="compz-btn-ico datastats-ico datastats-sortdir-ico asc" src="assets/fe-base-sortdir-desc.png">
+                              </ion-button>
+                            </div>
+                          </ion-col>
+                          <ion-col size="4" class="fe-base-dir-datastats-col audio order-col">
+                            <div class="fe-base-dir-datastats-inner-wrapper audio">
+                              <div class="fe-dstats-count-wrap audio">
+                                <span class="fe-ds-data files">{{appSStates.feDataStats.audio.count.file}}</span><span class="fe-ds-label count-in">-</span><span class="fe-ds-data dirs">{{appSStates.feDataStats.audio.count.dir}}</span>
+                              </div>
+                              <div class="fe-ds-sep bg">|</div>
+                              <div class="fe-dstats-size-wrap audio"><span class="fe-ds-data size no">{{appSStates.feDataStats.audio.size.no}}</span><span class="fe-ds-data size suffix">{{appSStates.feDataStats.audio.size.suffix}}</span></div>
+                            </div>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </div>
+                    <div *ngIf="appSStates.feTreeAudio.children.length<1&&appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]" class="compz-fe-noitems audio-depth1">
+                      <div class="fe-nilfiles inner-wrapper">
+                        <div class="compz-fe-nofiles-txt">No Audio Files</div>
+                        <ion-button (click)="fileExpFns('addfile',{bdir:'audio'})" class="compz-btn compz-fe-empty-add-files-btn">
+                          <img src="assets/home-player-playlist-addfiles-ico.png" class="compz-btn-ico compz-fe-empty-add-files-btn-ico">
+                        </ion-button>
+                      </div>
+                    </div>
+                    <!-- LEVEL 1 --------------------------------->
+                    <div (mouseleave)="feListMouseLeave()" [ngClass]="{'fe-arrangewin-combined-block':appSStates.feArrangeWin==='combined','fe-arrangewin-equal-block':appSStates.feArrangeWin==='equal'}" class="compz-fe-mainlist-wrapper mainlist-audio-wrapper" [ngStyle]="{'max-height':appSStates.feArrangeWin==='equal'?appSStates.feEqualWinMax:'unset'}">
+                      <ul *ngIf="appSStates.feTreeAudio.children&&appSStates.feDirVis.audio[this.appSStates.feTreeAudio.path]&&!appSStates.feSearch.feSearchInProg" class="compz-fe-item-list audio-depth1 coredirlist">
+                        <li *ngFor="let feAI1 of appSStates.feTreeAudio.children; index as a1i" class="compz-fe-file-item audio-depth1 li-fe-i-{{a1i}}">
+                          <div class="fe-i-wrap audio-depth-1 fe-i-wrap-{{a1i}}">
+                            <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&feAI1.type==='directory'&&appSStates.feSearch.feGhostDirs&&appSStates.feSearch.feGhostDirs[feAI1.path]&&appSStates.feSearch.feGhostDirs[feAI1.path].show&&(!appSStates.feSearch.feSearchMatches[feAI1.path]||appSStates.feSearch.filterData.feFilterOut.folder.hide)" class="fe-ghost-absolute-wrapper">
+                              <div class="fe-searchhiddenfolder-divider-header-wrapper ghost-depth-1">
+                                <div class="fe-searchhiddenfolder-divider-header path-txt ghost-depth-1">
+                                  <img src="assets/fe-base-search-ghostdir-audio.png" class="fe-ghostpath-baseico audio">
+                                  <div *ngFor="let feGP1 of appSStates.feSearch.feGhostDirs[feAI1.path].label; index as gp1" class="fe-ghostpath ghost-depth-1 gp1-{{gp1}}">
+                                    <img class="ghostpath-ico gpdir-arrow-ico gp1-ico-{{gp1}}" src="assets/fe-base-search-ghostdirarrow.png">
+                                    <div class="gpdir-dirtxt gp1-txt-{{gp1}}">{{feGP1}}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="fe-item-header-mevent-wrapper depth1" (contextmenu)="feItemMouseEvents('cm',feAI1)" (mouseenter)="feItemMouseEvents('me',feAI1)" (mouseleave)="feItemMouseEvents('ml',feAI1)" (click)="feItemMouseEvents('click',feAI1)" [ngClass]="{'feitem-hover':feItemHovered===feAI1.path,'fe-item-select':feItemSelected===feAI1.path,'feitem-searchhidden':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&(!appSStates.feSearch.feSearchMatches[feAI1.path]||(feAI1.type==='file'&&(appSStates.feSearch.filterData.feFilterOut[feAI1.extension]['hide'])||(feAI1.type==='file'&&appSStates.feSearch.filterData.feFilterOut['file']['hide']))||(feAI1.type==='directory'&&appSStates.feSearch.filterData.feFilterOut.folder.hide))}">
+                              <!-- isFile -->
+                              <div *ngIf="feAI1.type==='file'" class="fe-i-head fe-i-head-{{a1i}} audio-file-d1">
+                                <div class="fei-file-head-wrapper fei-file-headwrap-{{a1i}}">
+                                  <div class="fe-i-file-ico-wrapper"><img class="fe-ico file default" src="assets/fe-file-default.png"></div>
+                                  <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{a1i}}">
+                                    <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feAI1.path,'fedidrename':appSStates.feRename.feDidRename===feAI1.path}" class="fe-i-filename-txt fe-i-filename-{{a1i}}">{{feAI1.name}}</div>
+                                    <input ngModel #rnInputAudioLvl1File value={{appSStates.feRename.feRenameName}} (focus)="rnInputAudioLvl1File.setSelectionRange(0,rnInputAudioLvl1File.value.length-3)" (keydown)="feRenameEvent('keydown',$event,rnInputAudioLvl1File.value)" (change)="feRenameEvent('change',$event,rnInputAudioLvl1File.value)" (blur)="feRenameEvent('blur',$event,rnInputAudioLvl1File.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feAI1.path}" class="fe-i-rename-input fe-i-rename-al1i{{a1i}}">
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- isFolder -->
+                              <div *ngIf="feAI1.type==='directory'" class="fe-i-head fe-i-head-{{a1i}} audio-directory-d1">
+                                <!-- hasChild -->
+                                <div *ngIf="feAI1.children&&feAI1.children.length>0" class="fei-dir-haschildren-head-wrapper fei-dir-haschild-headwrap-{{a1i}}">
+                                  <div (click)="fileExpFns('toggledir',{bdir:'audio',path:feAI1.path})" class="fe-i-showhide-ico fe-i-showhide-ico-{{a1i}}">
+                                    <img *ngIf="appSStates.feDirVis.audio[feAI1.path]" class="fe-ico showhidearrow showing" src="assets/fe-base-arrow-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.audio[feAI1.path]" class="fe-ico showhidearrow hiding" src="assets/fe-base-arrow-close.png">
+                                  </div>
+                                  <div class="fe-i-fileext-ico fe-i-fileext-ico-{{a1i}}">
+                                    <img *ngIf="appSStates.feDirVis.audio[feAI1.path]" class="fe-ico dir dir-opened" src="assets/fe-dir-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.audio[feAI1.path]" class="fe-ico dir dir-closed" src="assets/fe-dir-closed.png">
+                                  </div>
+                                  <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{a1i}}">
+                                    <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feAI1.path,'fedidrename':appSStates.feRename.feDidRename===feAI1.path}" class="fe-i-filename-txt fe-i-filename-{{a1i}}">{{feAI1.name}}</div>
+                                    <input ngModel #rnInputAudioLvl1DirC  value={{appSStates.feRename.feRenameName}} (focus)="rnInputAudioLvl1DirC.setSelectionRange(0,rnInputAudioLvl1DirC.value.length-3)" (change)="feRenameEvent('change',$event,rnInputAudioLvl1DirC.value)" (blur)="feRenameEvent('blur',$event,rnInputAudioLvl1DirC.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feAI1.path}" class="fe-i-rename-input fe-i-rename-al1i{{a1i}}">
+                                  </div>
+                                  <div *ngIf="feAI1.children&&feAI1.children.length>0" class="fe-i-dircount">({{feAI1.children.length}})</div>
+                                </div>
+                                <!-- isEmpty -->
+                                <div *ngIf="!feAI1.children||(feAI1.children&&feAI1.children.length<1)" class="fei-dir-isempty-head-wrapper fei-dir-isempty-headwrap-{{a1i}}">
+                                  <div (click)="fileExpFns('toggledir',{bdir:'audio',path:feAI1.path})" class="fe-i-showhide-ico fe-i-showhide-ico-{{a1i}}">
+                                    <img *ngIf="appSStates.feDirVis.audio[feAI1.path]" class="fe-ico showhidearrow showing empty" src="assets/fe-base-arrow-empty-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.audio[feAI1.path]" class="fe-ico showhidearrow hiding empty" src="assets/fe-base-arrow-empty-closed.png">
+                                  </div>
+                                  <div class="fe-i-fileext-ico fe-i-fileext-ico-{{a1i}}">
+                                    <img *ngIf="appSStates.feDirVis.audio[feAI1.path]" class="fe-ico dir dir-open empty" src="assets/fe-dir-empty-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.audio[feAI1.path]" class="fe-ico dir dir-closed empty" src="assets/fe-dir-empty-closed.png">
+                                  </div>
+                                  <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{a1i}}">
+                                    <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feAI1.path,'fedidrename':appSStates.feRename.feDidRename===feAI1.path}" class="fe-i-filename-txt fe-i-filename-{{a1i}}">{{feAI1.name}}</div>
+                                    <input ngModel #rnInputAudioLvl1DirE value={{feAI1.name}} (change)="feRenameEvent('change',$event,rnInputAudioLvl1DirE.value)" (focus)="feRenameEvent('focus',$event,rnInputAudioLvl1DirE.value)" (blur)="feRenameEvent('blur',$event,rnInputAudioLvl1DirE.value)" (keydown)="feRenameEvent('keydown',$event,rnInputAudioLvl1DirE.value)" (keyup)="feRenameEvent('keyup',$event,rnInputAudioLvl1DirE.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feAI1.path}" class="fe-i-rename-input fe-i-rename-al1i{{a1i}}">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- LEVEL 2 --------------------------------->
+                            <div *ngIf="(!feAI1.children||feAI1.children&&feAI1.children.length<1)&&appSStates.feDirVis.audio[feAI1.path]" class="compz-fe-noitems audio-depth2">No Audio Files</div>
+                            <ul *ngIf="feAI1.children&&feAI1.children.length>0&&appSStates.feDirVis.audio[feAI1.path]" class="compz-fe-item-list audio-depth2" [ngClass]="{'searchpad':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                              <li *ngFor="let feAI2 of feAI1.children; index as a2i" class="compz-fe-file-item li-fe-i-{{a2i}} audio-depth2" [ngClass]="{'searchpaddingoff':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                                <div class="fe-i-wrap audio-depth-2 fe-i-wrap-{{a2i}}">
+                                  <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&feAI2.type==='directory'&&appSStates.feSearch.feGhostDirs&&appSStates.feSearch.feGhostDirs[feAI2.path].show&&(!appSStates.feSearch.feSearchMatches[feAI2.path]||appSStates.feSearch.filterData.feFilterOut.folder.hide)" class="fe-ghost-absolute-wrapper">
+                                    <div class="fe-searchhiddenfolder-divider-header-wrapper ghost-depth-2">
+                                      <div class="fe-searchhiddenfolder-divider-header path-txt ghost-depth-2">
+                                        <img src="assets/fe-base-search-ghostdir-audio.png" class="fe-ghostpath-baseico audio">
+                                        <div *ngFor="let feGP2 of appSStates.feSearch.feGhostDirs[feAI2.path].label; index as gp2" class="fe-ghostpath ghost-depth-2 gp1-{{gp2}}">
+                                          <img class="ghostpath-ico gpdir-arrow-ico gp2-ico-{{gp2}}" src="assets/fe-base-search-ghostdirarrow.png">
+                                          <div class="gpdir-dirtxt gp2-txt-{{gp2}}">{{feGP2}}</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="fe-item-header-mevent-wrapper depth2" (contextmenu)="feItemMouseEvents('cm',feAI2)" (mouseenter)="feItemMouseEvents('me',feAI2)" (mouseleave)="feItemMouseEvents('ml',feAI2)" (click)="feItemMouseEvents('click',feAI2)" [ngClass]="{'feitem-hover':feItemHovered===feAI2.path,'fe-item-select':feItemSelected===feAI2.path,'feitem-searchhidden':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&(!appSStates.feSearch.feSearchMatches[feAI2.path]||(feAI2.type==='file'&&(appSStates.feSearch.filterData.feFilterOut[feAI2.extension]['hide'])||(feAI2.type==='file'&&appSStates.feSearch.filterData.feFilterOut['file']['hide']))||(feAI2.type==='directory'&&appSStates.feSearch.filterData.feFilterOut.folder.hide))}">
+                                    <!-- isFile -->
+                                    <div *ngIf="feAI2.type==='file'" class="fe-i-head fe-i-head-{{a2i}} audio-file-d2">
+                                      <div class="fei-file-head-wrapper fei-file-headwrap-{{a2i}}">
+                                        <div class="fe-i-file-ico-wrapper"><img class="fe-ico file default" src="assets/fe-file-default.png"></div>
+                                        <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{a2i}}">
+                                          <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feAI2.path,'fedidrename':appSStates.feRename.feDidRename===feAI2.path}" class="fe-i-filename-txt fe-i-filename-{{a2i}}">{{feAI2.name}}</div>
+                                          <input ngModel #rnInputAudioLvl2File value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputAudioLvl2File.value)" (focus)="feRenameEvent('focus',$event,rnInputAudioLvl2File.value)" (blur)="feRenameEvent('blur',$event,rnInputAudioLvl2File.value)" (keydown)="feRenameEvent('keydown',$event,rnInputAudioLvl2File.value)" (keyup)="feRenameEvent('keyup',$event,rnInputAudioLvl2File.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feAI2.path}" class="fe-i-rename-input fe-i-rename-al2i{{a2i}}">
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- isFolder -->
+                                    <div *ngIf="feAI2.type==='directory'" class="fe-i-head fe-i-head-{{a2i}} audio-directory-d2">
+                                      <!-- hasChild -->
+                                      <div *ngIf="feAI2.children&&feAI2.children.length>0" class="fei-dir-haschildren-head-wrapper fei-dir-haschild-headwrap-{{a2i}}">
+                                        <div (click)="fileExpFns('toggledir',{bdir:'audio',path:feAI2.path})" class="fe-i-showhide-ico fe-i-showhide-ico-{{a2i}}">
+                                          <img *ngIf="appSStates.feDirVis.audio[feAI2.path]" class="fe-ico showhidearrow showing" src="assets/fe-base-arrow-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.audio[feAI2.path]" class="fe-ico showhidearrow hiding" src="assets/fe-base-arrow-close.png">
+                                        </div>
+                                        <div class="fe-i-fileext-ico fe-i-fileext-ico-{{a2i}}">
+                                          <img *ngIf="appSStates.feDirVis.audio[feAI2.path]" class="fe-ico dir dir-opened" src="assets/fe-dir-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.audio[feAI2.path]" class="fe-ico dir dir-closed" src="assets/fe-dir-closed.png">
+                                        </div>
+                                        <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{a2i}}">
+                                          <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feAI2.path,'fedidrename':appSStates.feRename.feDidRename===feAI2.path}" class="fe-i-filename-txt fe-i-filename-{{a2i}}">{{feAI2.name}}</div>
+                                          <input ngModel #rnInputAudioLvl2DirC value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputAudioLvl2DirC.value)" (focus)="feRenameEvent('focus',$event,rnInputAudioLvl2DirC.value)" (blur)="feRenameEvent('blur',$event,rnInputAudioLvl2DirC.value)" (keydown)="feRenameEvent('keydown',$event,rnInputAudioLvl2DirC.value)" (keyup)="feRenameEvent('keyup',$event,rnInputAudioLvl2DirC.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feAI2.path}" class="fe-i-rename-input fe-i-rename-al2i{{a2i}}">
+                                        </div>
+                                        <div *ngIf="feAI2.children&&feAI2.children.length>0" class="fe-i-dircount">({{feAI2.children.length}})</div>
+                                      </div>
+                                      <!-- isEmpty -->
+                                      <div *ngIf="!feAI2.children||(feAI2.children&&feAI2.children.length<1)" class="fei-dir-isempty-head-wrapper fei-dir-isempty-headwrap-{{a2i}}">
+                                        <div class="fe-i-showhide-ico fe-i-showhide-ico-{{a2i}}">
+                                          <img *ngIf="appSStates.feDirVis.audio[feAI2.path]" class="fe-ico showhidearrow showing empty" src="assets/fe-base-arrow-empty-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.audio[feAI2.path]" class="fe-ico showhidearrow hiding empty" src="assets/fe-base-arrow-empty-closed.png">
+                                        </div>
+                                        <div class="fe-i-fileext-ico fe-i-fileext-ico-{{a2i}}">
+                                          <img *ngIf="appSStates.feDirVis.audio[feAI2.path]" class="fe-ico dir dir-open empty" src="assets/fe-dir-empty-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.audio[feAI2.path]" class="fe-ico dir dir-closed empty" src="assets/fe-dir-empty-closed.png">
+                                        </div>
+                                        <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{a2i}}">
+                                          <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feAI2.path,'fedidrename':appSStates.feRename.feDidRename===feAI2.path}" class="fe-i-filename-txt fe-i-filename-{{a2i}}">{{feAI2.name}}</div>
+                                          <input ngModel #rnInputAudioLvl2DirE value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputAudioLvl2DirE.value)" (focus)="feRenameEvent('focus',$event,rnInputAudioLvl2DirE.value)" (blur)="feRenameEvent('blur',$event,rnInputAudioLvl2DirE.value)" (keydown)="feRenameEvent('keydown',$event,rnInputAudioLvl2DirE.value)" (keyup)="feRenameEvent('keyup',$event,rnInputAudioLvl2DirE.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feAI2.path}" class="fe-i-rename-input fe-i-rename-al2i{{a2i}}">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- LEVEL 3 --------------------------------->
+                                  <div *ngIf="(!feAI2.children||feAI2.children&&feAI2.children.length<1)&&appSStates.feDirVis.audio[feAI2.path]" class="compz-fe-noitems audio-depth3">No Audio Files</div>
+                                  <ul *ngIf="feAI2.children&&feAI2.children.length>0&&appSStates.feDirVis.audio[feAI2.path]" class="compz-fe-item-list audio-depth3" [ngClass]="{'searchpad':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                                    <li *ngFor="let feAI3 of feAI2.children; index as a3i" class="compz-fe-file-item li-fe-i-{{a3i}} audio-depth3" [ngClass]="{'searchpaddingoff':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                                      <div class="fe-i-wrap audio-depth-3 fe-i-wrap-{{a3i}}">
+                                        <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&feAI3.type==='directory'&&appSStates.feSearch.feGhostDirs&&appSStates.feSearch.feGhostDirs[feAI3.path]&&(!appSStates.feSearch.feSearchMatches[feAI3.path]||appSStates.feSearch.filterData.feFilterOut.folder.hide)" class="fe-ghost-absolute-wrapper">
+                                          <div class="fe-searchhiddenfolder-divider-header-wrapper ghost-depth-3">
+                                            <div class="fe-searchhiddenfolder-divider-header path-txt ghost-depth-3">
+                                              <img src="assets/fe-base-search-ghostdir-audio.png" class="fe-ghostpath-baseico audio">
+                                              <div *ngFor="let feGP3 of appSStates.feSearch.feGhostDirs[feAI3.path].label; index as gp3" class="fe-ghostpath ghost-depth-3 gp3-{{gp3}}">
+                                                <img class="ghostpath-ico gpdir-arrow-ico gp3-ico-{{gp3}}" src="assets/fe-base-search-ghostdirarrow.png">
+                                                <div class="gpdir-dirtxt gp1-txt-{{gp3}}">{{feGP3}}</div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="fe-item-header-mevent-wrapper depth3" (contextmenu)="feItemMouseEvents('cm',feAI3)" (mouseenter)="feItemMouseEvents('me',feAI3)" (mouseleave)="feItemMouseEvents('ml',feAI3)" (click)="feItemMouseEvents('click',feAI3)" [ngClass]="{'feitem-hover':feItemHovered===feAI3.path,'fe-item-select':feItemSelected===feAI3.path,'feitem-searchhidden':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&(!appSStates.feSearch.feSearchMatches[feAI3.path]||(feAI3.type==='file'&&(appSStates.feSearch.filterData.feFilterOut[feAI3.extension]['hide'])||(feAI3.type==='file'&&appSStates.feSearch.filterData.feFilterOut['file']['hide']))||(feAI3.type==='directory'&&appSStates.feSearch.filterData.feFilterOut.folder.hide))}">
+                                          <!-- isFile -->
+                                          <div *ngIf="feAI3.type==='file'" class="fe-i-head fe-i-head-{{a3i}} audio-file-d3">
+                                            <div class="fei-file-head-wrapper fei-file-headwrap-{{a3i}}">
+                                              <div class="fe-i-file-ico-wrapper"><img class="fe-ico file default" src="assets/fe-file-default.png"></div>
+                                              <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{a3i}}">
+                                                <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feAI3.path,'fedidrename':appSStates.feRename.feDidRename===feAI3.path}" class="fe-i-filename-txt fe-i-filename-{{a3i}}">{{feAI3.name}}</div>
+                                                <input ngModel #rnInputAudioLvl3File value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputAudioLvl3File.value)" (focus)="feRenameEvent('focus',$event,rnInputAudioLvl3File.value)" (blur)="feRenameEvent('blur',$event,rnInputAudioLvl3File.value)" (keydown)="feRenameEvent('keydown',$event,rnInputAudioLvl3File.value)" (keyup)="feRenameEvent('keyup',$event,rnInputAudioLvl3File.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feAI3.path}" class="fe-i-rename-input fe-i-rename-al3i{{a3i}}">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- isFolder -->
+                                          <div *ngIf="feAI3.type==='directory'" class="fe-i-head fe-i-head-{{a3i}} audio-directory-d3">
+                                            <!-- isDepthLimit -->
+                                            <div class="fei-dir-isempty-head-wrapper fei-dir-isempty-headwrap-{{a3i}}">
+                                              <div class="fe-i-showhide-ico fe-i-showhide-ico-{{a3i}}">
+                                                <img class="fe-ico showhidearrow depthlimit" src="assets/fe-base-arrow-empty-closed.png">
+                                              </div>
+                                              <div class="fe-i-fileext-ico fe-i-fileext-ico-{{a3i}}">
+                                                <img class="fe-ico dir dir-open empty" src="assets/fe-dir-toodeep.png">
+                                              </div>
+                                              <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{a3i}} toodeepfname">
+                                                <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feAI3.path,'fedidrename':appSStates.feRename.feDidRename===feAI3.path}" class="fe-i-filename-txt fe-i-filename-{{a3i}}">{{feAI3.name}}</div>
+                                                <input ngModel #rnInputAudioLvl3DirE value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputAudioLvl3DirE.value)" (focus)="feRenameEvent('focus',$event,rnInputAudioLvl3DirE.value)" (blur)="feRenameEvent('blur',$event,rnInputAudioLvl3DirE.value)" (keydown)="feRenameEvent('keydown',$event,rnInputAudioLvl3DirE.value)" (keyup)="feRenameEvent('keyup',$event,rnInputAudioLvl3DirE.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feAI3.path}" class="fe-i-rename-input fe-i-rename-al3i{{a3i}}">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+  <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- ////////////////////////////////////////////////[  S U B S  ]/////////////////////////////////////////////////////////// -->
+  <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                  <div *ngIf="appSStates.feTreeSubs" class="fe-base-dir-section default subs-dir">
+                    <!-- SUBS HEADER -------------------->
+                    <div *ngIf="!appSStates.feSearch.tdData.feSearchHideBlock.subs" class="fe-base-dir-header default subs-dir">
+                      <div class="fe-base-dir-header-label default">
+                        <div (click)="fileExpFns('toggledir',{bdir:'subs',path:this.appSStates.feTreeSubs.path})" class="fe-showhide-dir-wrap">
+                          <div class="fe-base-dir-header-label-showhide-ico default">
+                            <img *ngIf="appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]" class="fe-ico showhidearrow showing" src="assets/fe-base-arrow-open.png">
+                            <img *ngIf="!appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]" class="fe-ico showhidearrow hiding" src="assets/fe-base-arrow-close.png">
+                          </div>
+                          <div [ngStyle]="{'color':appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]?'#878787':'#565656'}" class="fe-base-dir-header-label-txt">{{appSStates.feTreeSubs.name}}</div>
+                        </div>
+                        <div class="fe-action-btns-container-wrap">
+                          <div (click)="fileExpFns('sync',['subs'])" class="fe-basedir-actionbtn-wrap sync">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-basedir-actionbtn-ico sync" src="assets/fe-base-sync.png"></div>
+                          </div>
+                          <div (click)="fileExpFns('addfile',{bdir:'subs'})" class="fe-basedir-actionbtn-wrap addfile">
+                            <div class="fe-action-btn-ico-wrap addfile"><img [ngClass]="{'do-prompt-hl':fePromptAddFile}" class="fe-basedir-actionbtn-ico addfile" src="assets/fe-base-addfile-ico.png"></div>
+                          </div>
+                          <div *ngIf="appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]" (click)="fileExpFns('collapseall',{bdir:'subs'})" class="fe-basedir-actionbtn-wrap collapseall">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-basedir-actionbtn-ico collapseall" src="assets/fe-base-arrow-collapseall.png"></div>
+                          </div>
+                          <div *ngIf="!appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]" (click)="fileExpFns('expandall',{bdir:'subs'})" class="fe-basedir-actionbtn-wrap collapseall">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-basedir-actionbtn-ico expandall" src="assets/fe-base-arrow-collapseall.png"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- DIR DATA STATS -------------------------->
+                    <div *ngIf="appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]&&!appSStates.feSearch.feShowSearch" class="fe-base-dir-datastats-wrapper subs">
+                      <ion-grid class="fe-base-dir-datastats-grid subs">
+                        <ion-row class="fe-base-dir-datastats-row subs">
+                          <ion-col size="8" class="fe-base-dir-datastats-col subs order-col">
+                            <div class="fe-base-dir-datastats sortorder-wrapper">
+                              <div class="compz-base-order-label-txt">Order:</div>
+                              <ion-button (click)="fileExpFns('order',{bdir:'subs',type:'by',dir:'prev'})" class="compz-btn datastats-btn datastats-sortorder-btn prev">
+                                <img class="compz-btn-ico datastats-ico datastats-sortorder-ico prev" src="assets/fe-base-sortorder-prev.png">
+                              </ion-button>
+                              <input type="text" #feSubsSortByInput value={{appSStates.feItemOrder.subs.by}} class="datastats-sortorder-value-label">
+                              <ion-button (click)="fileExpFns('order',{bdir:'subs',type:'by',dir:'next'})" class="compz-btn datastats-btn datastats-sortorder-btn next">
+                                <img class="compz-btn-ico datastats-ico datastats-sortorder-ico next" src="assets/fe-base-sortorder-next.png">
+                              </ion-button>
+                            </div>
+                            <div class="fe-base-dir-datastats sortdir-wrapper">
+                              <ion-button (click)="fileExpFns('order',{bdir:'subs',type:'dir',value:'toggle'})" class="compz-btn datastats-btn datastats-sortdir-btn asc">
+                                <img *ngIf="appSStates.feItemOrder.subs.dir==='asc'" class="compz-btn-ico datastats-ico datastats-sortdir-ico desc" src="assets/fe-base-sortdir-asc.png">
+                                <img *ngIf="appSStates.feItemOrder.subs.dir==='desc'" class="compz-btn-ico datastats-ico datastats-sortdir-ico asc" src="assets/fe-base-sortdir-desc.png">
+                              </ion-button>
+                            </div>
+                          </ion-col>
+                          <ion-col size="4" class="fe-base-dir-datastats-col subs order-col">
+                            <div class="fe-base-dir-datastats-inner-wrapper subs">
+                              <div class="fe-dstats-count-wrap subs">
+                                <span class="fe-ds-data files">{{appSStates.feDataStats.subs.count.file}}</span><span class="fe-ds-label count-in">-</span><span class="fe-ds-data dirs">{{appSStates.feDataStats.subs.count.dir}}</span>
+                              </div>
+                              <div class="fe-ds-sep bg">|</div>
+                              <div class="fe-dstats-size-wrap subs"><span class="fe-ds-data size no">{{appSStates.feDataStats.subs.size.no}}</span><span class="fe-ds-data size suffix">{{appSStates.feDataStats.subs.size.suffix}}</span></div>
+                            </div>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </div>
+                    <div *ngIf="appSStates.feTreeSubs.children.length<1&&appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]" class="compz-fe-noitems subs-depth1">
+                      <div class="fe-nilfiles inner-wrapper">
+                        <div class="compz-fe-nofiles-txt">No Subs Files</div>
+                        <ion-button (click)="fileExpFns('addfile',{bdir:'subs'})" class="compz-btn compz-fe-empty-add-files-btn">
+                          <img src="assets/home-player-playlist-addfiles-ico.png" class="compz-btn-ico compz-fe-empty-add-files-btn-ico">
+                        </ion-button>
+                      </div>
+                    </div>
+                    <!-- LEVEL 1 --------------------------------->
+                    <div (mouseleave)="feListMouseLeave()" [ngClass]="{'fe-arrangewin-combined-block':appSStates.feArrangeWin==='combined','fe-arrangewin-equal-block':appSStates.feArrangeWin==='equal'}" class="compz-fe-mainlist-wrapper mainlist-subs-wrapper" [ngStyle]="{'max-height':appSStates.feArrangeWin==='equal'?appSStates.feEqualWinMax:'unset'}">
+                      <ul *ngIf="appSStates.feTreeSubs.children&&appSStates.feDirVis.subs[this.appSStates.feTreeSubs.path]&&!appSStates.feSearch.feSearchInProg" class="compz-fe-item-list subs-depth1 coredirlist">
+                        <li *ngFor="let feSI1 of appSStates.feTreeSubs.children; index as s1i" class="compz-fe-file-item subs-depth1 li-fe-i-{{s1i}}">
+                          <div class="fe-i-wrap subs-depth-1 fe-i-wrap-{{s1i}}">
+                            <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&feSI1.type==='directory'&&appSStates.feSearch.feGhostDirs&&appSStates.feSearch.feGhostDirs[feSI1.path]&&appSStates.feSearch.feGhostDirs[feSI1.path].show&&(!appSStates.feSearch.feSearchMatches[feSI1.path]||appSStates.feSearch.filterData.feFilterOut.folder.hide)" class="fe-ghost-absolute-wrapper">
+                              <div class="fe-searchhiddenfolder-divider-header-wrapper ghost-depth-1">
+                                <div class="fe-searchhiddenfolder-divider-header path-txt ghost-depth-1">
+                                  <img src="assets/fe-base-search-ghostdir-subs.png" class="fe-ghostpath-baseico subs">
+                                  <div *ngFor="let feGP1 of appSStates.feSearch.feGhostDirs[feSI1.path].label; index as gp1" class="fe-ghostpath ghost-depth-1 gp1-{{gp1}}">
+                                    <img class="ghostpath-ico gpdir-arrow-ico gp1-ico-{{gp1}}" src="assets/fe-base-search-ghostdirarrow.png">
+                                    <div class="gpdir-dirtxt gp1-txt-{{gp1}}">{{feGP1}}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="fe-item-header-mevent-wrapper depth1" (contextmenu)="feItemMouseEvents('cm',feSI1)" (mouseenter)="feItemMouseEvents('me',feSI1)" (mouseleave)="feItemMouseEvents('ml',feSI1)" (click)="feItemMouseEvents('click',feSI1)" [ngClass]="{'feitem-hover':feItemHovered===feSI1.path,'fe-item-select':feItemSelected===feSI1.path,'feitem-searchhidden':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&(!appSStates.feSearch.feSearchMatches[feSI1.path]||(feSI1.type==='file'&&(appSStates.feSearch.filterData.feFilterOut[feSI1.extension]['hide'])||(feSI1.type==='file'&&appSStates.feSearch.filterData.feFilterOut['file']['hide']))||(feSI1.type==='directory'&&appSStates.feSearch.filterData.feFilterOut.folder.hide))}">
+                              <!-- isFile -->
+                              <div *ngIf="feSI1.type==='file'" class="fe-i-head fe-i-head-{{s1i}} subs-file-d1">
+                                <div class="fei-file-head-wrapper fei-file-headwrap-{{s1i}}">
+                                  <div class="fe-i-file-ico-wrapper"><img class="fe-ico file default" src="assets/fe-file-default.png"></div>
+                                  <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{s1i}}">
+                                    <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feSI1.path,'fedidrename':appSStates.feRename.feDidRename===feSI1.path}" class="fe-i-filename-txt fe-i-filename-{{s1i}}">{{feSI1.name}}</div>
+                                    <input ngModel #rnInputSubsLvl1File value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputSubsLvl1File.value)" (focus)="feRenameEvent('focus',$event,rnInputSubsLvl1File.value)" (blur)="feRenameEvent('blur',$event,rnInputSubsLvl1File.value)" (keydown)="feRenameEvent('keydown',$event,rnInputSubsLvl1File.value)" (keyup)="feRenameEvent('keyup',$event,rnInputSubsLvl1File.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feSI1.path}" class="fe-i-rename-input fe-i-rename-sl1i{{s1i}}">
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- isFolder -->
+                              <div *ngIf="feSI1.type==='directory'" class="fe-i-head fe-i-head-{{s1i}} subs-directory-d1">
+                                <!-- hasChild -->
+                                <div *ngIf="feSI1.children&&feSI1.children.length>0" class="fei-dir-haschildren-head-wrapper fei-dir-haschild-headwrap-{{s1i}}">
+                                  <div (click)="fileExpFns('toggledir',{bdir:'subs',path:feSI1.path})" class="fe-i-showhide-ico fe-i-showhide-ico-{{s1i}}">
+                                    <img *ngIf="appSStates.feDirVis.subs[feSI1.path]" class="fe-ico showhidearrow showing" src="assets/fe-base-arrow-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.subs[feSI1.path]" class="fe-ico showhidearrow hiding" src="assets/fe-base-arrow-close.png">
+                                  </div>
+                                  <div class="fe-i-fileext-ico fe-i-fileext-ico-{{s1i}}">
+                                    <img *ngIf="appSStates.feDirVis.subs[feSI1.path]" class="fe-ico dir dir-opened" src="assets/fe-dir-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.subs[feSI1.path]" class="fe-ico dir dir-closed" src="assets/fe-dir-closed.png">
+                                  </div>
+                                  <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{s1i}}">
+                                    <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feSI1.path,'fedidrename':appSStates.feRename.feDidRename===feSI1.path}" class="fe-i-filename-txt fe-i-filename-{{s1i}}">{{feSI1.name}}</div>
+                                    <input ngModel #rnInputSubsLvl1DirC value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputSubsLvl1DirC.value)" (focus)="feRenameEvent('focus',$event,rnInputSubsLvl1DirC.value)" (blur)="feRenameEvent('blur',$event,rnInputSubsLvl1DirC.value)" (keydown)="feRenameEvent('keydown',$event,rnInputSubsLvl1DirC.value)" (keyup)="feRenameEvent('keyup',$event,rnInputSubsLvl1DirC.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feSI1.path}" class="fe-i-rename-input fe-i-rename-sl1i{{s1i}}">
+                                  </div>
+                                  <div *ngIf="feSI1.children&&feSI1.children.length>0" class="fe-i-dircount">({{feSI1.children.length}})</div>
+                                </div>
+                                <!-- isEmpty -->
+                                <div *ngIf="!feSI1.children||(feSI1.children&&feSI1.children.length<1)" class="fei-dir-isempty-head-wrapper fei-dir-isempty-headwrap-{{s1i}}">
+                                  <div (click)="fileExpFns('toggledir',{bdir:'subs',path:feSI1.path})" class="fe-i-showhide-ico fe-i-showhide-ico-{{s1i}}">
+                                    <img *ngIf="appSStates.feDirVis.subs[feSI1.path]" class="fe-ico showhidearrow showing empty" src="assets/fe-base-arrow-empty-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.subs[feSI1.path]" class="fe-ico showhidearrow hiding empty" src="assets/fe-base-arrow-empty-closed.png">
+                                  </div>
+                                  <div class="fe-i-fileext-ico fe-i-fileext-ico-{{s1i}}">
+                                    <img *ngIf="appSStates.feDirVis.subs[feSI1.path]" class="fe-ico dir dir-open empty" src="assets/fe-dir-empty-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.subs[feSI1.path]" class="fe-ico dir dir-closed empty" src="assets/fe-dir-empty-closed.png">
+                                  </div>
+                                  <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{s1i}}">
+                                    <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feSI1.path,'fedidrename':appSStates.feRename.feDidRename===feSI1.path}" class="fe-i-filename-txt fe-i-filename-{{s1i}}">{{feSI1.name}}</div>
+                                    <input ngModel #rnInputSubsLvl1DirE value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputSubsLvl1DirE.value)" (focus)="feRenameEvent('focus',$event,rnInputSubsLvl1DirE.value)" (blur)="feRenameEvent('blur',$event,rnInputSubsLvl1DirE.value)" (keydown)="feRenameEvent('keydown',$event,rnInputSubsLvl1DirE.value)" (keyup)="feRenameEvent('keyup',$event,rnInputSubsLvl1DirE.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feSI1.path}" class="fe-i-rename-input fe-i-rename-sl1i{{s1i}}">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- LEVEL 2 --------------------------------->
+                            <div *ngIf="(!feSI1.children||feSI1.children&&feSI1.children.length<1)&&appSStates.feDirVis.subs[feSI1.path]" class="compz-fe-noitems subs-depth2">No Subs Files</div>
+                            <ul *ngIf="feSI1.children&&feSI1.children.length>0&&appSStates.feDirVis.subs[feSI1.path]" class="compz-fe-item-list subs-depth2" [ngClass]="{'searchpad':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                              <li *ngFor="let feSI2 of feSI1.children; index as s2i" class="compz-fe-file-item li-fe-i-{{s2i}} subs-depth2" [ngClass]="{'searchpaddingoff':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                                <div class="fe-i-wrap subs-depth-2 fe-i-wrap-{{s2i}}">
+                                  <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&feSI2.type==='directory'&&appSStates.feSearch.feGhostDirs&&appSStates.feSearch.feGhostDirs[feSI2.path].show&&(!appSStates.feSearch.feSearchMatches[feSI2.path]||appSStates.feSearch.filterData.feFilterOut.folder.hide)" class="fe-ghost-absolute-wrapper">
+                                    <div class="fe-searchhiddenfolder-divider-header-wrapper ghost-depth-2">
+                                      <div class="fe-searchhiddenfolder-divider-header path-txt ghost-depth-2">
+                                        <img src="assets/fe-base-search-ghostdir-subs.png" class="fe-ghostpath-baseico subs">
+                                        <div *ngFor="let feGP2 of appSStates.feSearch.feGhostDirs[feSI2.path].label; index as gp2" class="fe-ghostpath ghost-depth-2 gp1-{{gp2}}">
+                                          <img class="ghostpath-ico gpdir-arrow-ico gp2-ico-{{gp2}}" src="assets/fe-base-search-ghostdirarrow.png">
+                                          <div class="gpdir-dirtxt gp2-txt-{{gp2}}">{{feGP2}}</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="fe-item-header-mevent-wrapper depth2" (contextmenu)="feItemMouseEvents('cm',feSI2)" (mouseenter)="feItemMouseEvents('me',feSI2)" (mouseleave)="feItemMouseEvents('ml',feSI2)" (click)="feItemMouseEvents('click',feSI2)" [ngClass]="{'feitem-hover':feItemHovered===feSI2.path,'fe-item-select':feItemSelected===feSI2.path,'feitem-searchhidden':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&(!appSStates.feSearch.feSearchMatches[feSI2.path]||(feSI2.type==='file'&&(appSStates.feSearch.filterData.feFilterOut[feSI2.extension]['hide'])||(feSI2.type==='file'&&appSStates.feSearch.filterData.feFilterOut['file']['hide']))||(feSI2.type==='directory'&&appSStates.feSearch.filterData.feFilterOut.folder.hide))}">
+                                    <!-- isFile -->
+                                    <div *ngIf="feSI2.type==='file'" class="fe-i-head fe-i-head-{{s2i}} subs-file-d2">
+                                      <div class="fei-file-head-wrapper fei-file-headwrap-{{s2i}}">
+                                        <div class="fe-i-file-ico-wrapper"><img class="fe-ico file default" src="assets/fe-file-default.png"></div>
+                                        <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{s2i}}">
+                                          <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feSI2.path,'fedidrename':appSStates.feRename.feDidRename===feSI2.path}" class="fe-i-filename-txt fe-i-filename-{{s2i}}">{{feSI2.name}}</div>
+                                          <input ngModel #rnInputSubsLvl2File value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputSubsLvl2File.value)" (focus)="feRenameEvent('focus',$event,rnInputSubsLvl2File.value)" (blur)="feRenameEvent('blur',$event,rnInputSubsLvl2File.value)" (keydown)="feRenameEvent('keydown',$event,rnInputSubsLvl2File.value)" (keyup)="feRenameEvent('keyup',$event,rnInputSubsLvl2File.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feSI2.path}" class="fe-i-rename-input fe-i-rename-sl2i{{s2i}}">
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- isFolder -->
+                                    <div *ngIf="feSI2.type==='directory'" class="fe-i-head fe-i-head-{{s2i}} subs-directory-d2">
+                                      <!-- hasChild -->
+                                      <div *ngIf="feSI2.children&&feSI2.children.length>0" class="fei-dir-haschildren-head-wrapper fei-dir-haschild-headwrap-{{s2i}}">
+                                        <div (click)="fileExpFns('toggledir',{bdir:'subs',path:feSI2.path})" class="fe-i-showhide-ico fe-i-showhide-ico-{{s2i}}">
+                                          <img *ngIf="appSStates.feDirVis.subs[feSI2.path]" class="fe-ico showhidearrow showing" src="assets/fe-base-arrow-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.subs[feSI2.path]" class="fe-ico showhidearrow hiding" src="assets/fe-base-arrow-close.png">
+                                        </div>
+                                        <div class="fe-i-fileext-ico fe-i-fileext-ico-{{s2i}}">
+                                          <img *ngIf="appSStates.feDirVis.subs[feSI2.path]" class="fe-ico dir dir-opened" src="assets/fe-dir-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.subs[feSI2.path]" class="fe-ico dir dir-closed" src="assets/fe-dir-closed.png">
+                                        </div>
+                                        <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{s2i}}">
+                                          <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feSI2.path,'fedidrename':appSStates.feRename.feDidRename===feSI2.path}" class="fe-i-filename-txt fe-i-filename-{{s2i}}">{{feSI2.name}}</div>
+                                          <input ngModel #rnInputSubsLvl2DirC value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputSubsLvl2DirC.value)" (focus)="feRenameEvent('focus',$event,rnInputSubsLvl2DirC.value)" (blur)="feRenameEvent('blur',$event,rnInputSubsLvl2DirC.value)" (keydown)="feRenameEvent('keydown',$event,rnInputSubsLvl2DirC.value)" (keyup)="feRenameEvent('keyup',$event,rnInputSubsLvl2DirC.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feSI2.path}" class="fe-i-rename-input fe-i-rename-sl2i{{s2i}}">
+                                        </div>
+                                        <div *ngIf="feSI2.children&&feSI2.children.length>0" class="fe-i-dircount">({{feSI2.children.length}})</div>
+                                      </div>
+                                      <!-- isEmpty -->
+                                      <div *ngIf="!feSI2.children||(feSI2.children&&feSI2.children.length<1)" class="fei-dir-isempty-head-wrapper fei-dir-isempty-headwrap-{{s2i}}">
+                                        <div class="fe-i-showhide-ico fe-i-showhide-ico-{{s2i}}">
+                                          <img *ngIf="appSStates.feDirVis.subs[feSI2.path]" class="fe-ico showhidearrow showing empty" src="assets/fe-base-arrow-empty-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.subs[feSI2.path]" class="fe-ico showhidearrow hiding empty" src="assets/fe-base-arrow-empty-closed.png">
+                                        </div>
+                                        <div class="fe-i-fileext-ico fe-i-fileext-ico-{{s2i}}">
+                                          <img *ngIf="appSStates.feDirVis.subs[feSI2.path]" class="fe-ico dir dir-open empty" src="assets/fe-dir-empty-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.subs[feSI2.path]" class="fe-ico dir dir-closed empty" src="assets/fe-dir-empty-closed.png">
+                                        </div>
+                                        <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{s2i}}">
+                                          <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feSI2.path,'fedidrename':appSStates.feRename.feDidRename===feSI2.path}" class="fe-i-filename-txt fe-i-filename-{{s2i}}">{{feSI2.name}}</div>
+                                          <input ngModel #rnInputSubsLvl2DirE value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputSubsLvl2DirE.value)" (focus)="feRenameEvent('focus',$event,rnInputSubsLvl2DirE.value)" (blur)="feRenameEvent('blur',$event,rnInputSubsLvl2DirE.value)" (keydown)="feRenameEvent('keydown',$event,rnInputSubsLvl2DirE.value)" (keyup)="feRenameEvent('keyup',$event,rnInputSubsLvl2DirE.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feSI2.path}" class="fe-i-rename-input fe-i-rename-sl2i{{s2i}}">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- LEVEL 3 --------------------------------->
+                                  <div *ngIf="(!feSI2.children||feSI2.children&&feSI2.children.length<1)&&appSStates.feDirVis.subs[feSI2.path]" class="compz-fe-noitems subs-depth3">No Subs Files</div>
+                                  <ul *ngIf="feSI2.children&&feSI2.children.length>0&&appSStates.feDirVis.subs[feSI2.path]" class="compz-fe-item-list subs-depth3" [ngClass]="{'searchpad':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                                    <li *ngFor="let feSI3 of feSI2.children; index as s3i" class="compz-fe-file-item li-fe-i-{{s3i}} subs-depth3" [ngClass]="{'searchpaddingoff':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                                      <div class="fe-i-wrap subs-depth-3 fe-i-wrap-{{s3i}}">
+                                        <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&feSI3.type==='directory'&&appSStates.feSearch.feGhostDirs&&appSStates.feSearch.feGhostDirs[feSI3.path]&&(!appSStates.feSearch.feSearchMatches[feSI3.path]||appSStates.feSearch.filterData.feFilterOut.folder.hide)" class="fe-ghost-absolute-wrapper">
+                                          <div class="fe-searchhiddenfolder-divider-header-wrapper ghost-depth-3">
+                                            <div class="fe-searchhiddenfolder-divider-header path-txt ghost-depth-3">
+                                              <img src="assets/fe-base-search-ghostdir-subs.png" class="fe-ghostpath-baseico subs">
+                                              <div *ngFor="let feGP3 of appSStates.feSearch.feGhostDirs[feSI3.path].label; index as gp3" class="fe-ghostpath ghost-depth-3 gp3-{{gp3}}">
+                                                <img class="ghostpath-ico gpdir-arrow-ico gp3-ico-{{gp3}}" src="assets/fe-base-search-ghostdirarrow.png">
+                                                <div class="gpdir-dirtxt gp1-txt-{{gp3}}">{{feGP3}}</div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="fe-item-header-mevent-wrapper depth3" (contextmenu)="feItemMouseEvents('cm',feSI3)" (mouseenter)="feItemMouseEvents('me',feSI3)" (mouseleave)="feItemMouseEvents('ml',feSI3)" (click)="feItemMouseEvents('click',feSI3)" [ngClass]="{'feitem-hover':feItemHovered===feSI3.path,'fe-item-select':feItemSelected===feSI3.path,'feitem-searchhidden':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&(!appSStates.feSearch.feSearchMatches[feSI3.path]||(feSI3.type==='file'&&(appSStates.feSearch.filterData.feFilterOut[feSI3.extension]['hide'])||(feSI3.type==='file'&&appSStates.feSearch.filterData.feFilterOut['file']['hide']))||(feSI3.type==='directory'&&appSStates.feSearch.filterData.feFilterOut.folder.hide))}">
+                                          <!-- isFile -->
+                                          <div *ngIf="feSI3.type==='file'" class="fe-i-head fe-i-head-{{s3i}} subs-file-d3">
+                                            <div class="fei-file-head-wrapper fei-file-headwrap-{{s3i}}">
+                                              <div class="fe-i-file-ico-wrapper"><img class="fe-ico file default" src="assets/fe-file-default.png"></div>
+                                              <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{s3i}}">
+                                                <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feSI3.path,'fedidrename':appSStates.feRename.feDidRename===feSI3.path}" class="fe-i-filename-txt fe-i-filename-{{s3i}}">{{feSI3.name}}</div>
+                                                <input ngModel #rnInputSubsLvl3File value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputSubsLvl3File.value)" (focus)="feRenameEvent('focus',$event,rnInputSubsLvl3File.value)" (blur)="feRenameEvent('blur',$event,rnInputSubsLvl3File.value)" (keydown)="feRenameEvent('keydown',$event,rnInputSubsLvl3File.value)" (keyup)="feRenameEvent('keyup',$event,rnInputSubsLvl3File.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feSI3.path}" class="fe-i-rename-input fe-i-rename-sl3i{{s3i}}">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- isFolder -->
+                                          <div *ngIf="feSI3.type==='directory'" class="fe-i-head fe-i-head-{{s3i}} subs-directory-d3">
+                                            <!-- isDepthLimit -->
+                                            <div class="fei-dir-isempty-head-wrapper fei-dir-isempty-headwrap-{{s3i}}">
+                                              <div class="fe-i-showhide-ico fe-i-showhide-ico-{{s3i}}">
+                                                <img class="fe-ico showhidearrow depthlimit" src="assets/fe-base-arrow-empty-closed.png">
+                                              </div>
+                                              <div class="fe-i-fileext-ico fe-i-fileext-ico-{{s3i}}">
+                                                <img class="fe-ico dir dir-open empty" src="assets/fe-dir-toodeep.png">
+                                              </div>
+                                              <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{s3i}} toodeepfname">
+                                                <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feSI3.path,'fedidrename':appSStates.feRename.feDidRename===feSI3.path}" class="fe-i-filename-txt fe-i-filename-{{s3i}}">{{feSI3.name}}</div>
+                                                <input ngModel #rnInputSubsLvl3DirE value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputSubsLvl3DirE.value)" (focus)="feRenameEvent('focus',$event,rnInputSubsLvl3DirE.value)" (blur)="feRenameEvent('blur',$event,rnInputSubsLvl3DirE.value)" (keydown)="feRenameEvent('keydown',$event,rnInputSubsLvl3DirE.value)" (keyup)="feRenameEvent('keyup',$event,rnInputSubsLvl3DirE.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feSI3.path}" class="fe-i-rename-input fe-i-rename-sl3i{{s3i}}">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+  <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- ////////////////////////////////////////////////[  V I D E O  ]///////////////////////////////////////////////////////// -->
+  <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                  <div *ngIf="appSStates.feTreeVideo" class="fe-base-dir-section default video-dir">
+                    <!-- VIDEO HEADER -------------------->
+                    <div *ngIf="!appSStates.feSearch.tdData.feSearchHideBlock.video" class="fe-base-dir-header default video-dir">
+                      <div class="fe-base-dir-header-label default">
+                        <div (click)="fileExpFns('toggledir',{bdir:'video',path:this.appSStates.feTreeVideo.path})" class="fe-showhide-dir-wrap">
+                          <div class="fe-base-dir-header-label-showhide-ico default">
+                            <img *ngIf="appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]" class="fe-ico showhidearrow showing" src="assets/fe-base-arrow-open.png">
+                            <img *ngIf="!appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]" class="fe-ico showhidearrow hiding" src="assets/fe-base-arrow-close.png">
+                          </div>
+                          <div [ngStyle]="{'color':appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]?'#878787':'#565656'}" class="fe-base-dir-header-label-txt">{{appSStates.feTreeVideo.name}}</div>
+                        </div>
+                        <div class="fe-action-btns-container-wrap">
+                          <div (click)="fileExpFns('sync',['video'])" class="fe-basedir-actionbtn-wrap sync">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-basedir-actionbtn-ico sync" src="assets/fe-base-sync.png"></div>
+                          </div>
+                          <div (click)="fileExpFns('addfile',{bdir:'video'})" class="fe-basedir-actionbtn-wrap addfile">
+                            <div class="fe-action-btn-ico-wrap addfile"><img [ngClass]="{'do-prompt-hl':fePromptAddFile}" class="fe-basedir-actionbtn-ico addfile" src="assets/fe-base-addfile-ico.png"></div>
+                          </div>
+                          <div *ngIf="appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]" (click)="fileExpFns('collapseall',{bdir:'video'})" class="fe-basedir-actionbtn-wrap collapseall">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-basedir-actionbtn-ico collapseall" src="assets/fe-base-arrow-collapseall.png"></div>
+                          </div>
+                          <div *ngIf="!appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]" (click)="fileExpFns('expandall',{bdir:'video'})" class="fe-basedir-actionbtn-wrap collapseall">
+                            <div class="fe-action-btn-ico-wrap sync"><img class="fe-basedir-actionbtn-ico expandall" src="assets/fe-base-arrow-collapseall.png"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- DIR DATA STATS -------------------------->
+                    <div *ngIf="appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]&&!appSStates.feSearch.feShowSearch" class="fe-base-dir-datastats-wrapper video">
+                      <ion-grid class="fe-base-dir-datastats-grid video">
+                        <ion-row class="fe-base-dir-datastats-row video">
+                          <ion-col size="8" class="fe-base-dir-datastats-col video order-col">
+                            <div class="fe-base-dir-datastats sortorder-wrapper">
+                              <div class="compz-base-order-label-txt">Order:</div>
+                              <ion-button (click)="fileExpFns('order',{bdir:'video',type:'by',dir:'prev'})" class="compz-btn datastats-btn datastats-sortorder-btn prev">
+                                <img class="compz-btn-ico datastats-ico datastats-sortorder-ico prev" src="assets/fe-base-sortorder-prev.png">
+                              </ion-button>
+                              <input type="text" #feVideoSortByInput value={{appSStates.feItemOrder.video.by}} class="datastats-sortorder-value-label">
+                              <ion-button (click)="fileExpFns('order',{bdir:'video',type:'by',dir:'next'})" class="compz-btn datastats-btn datastats-sortorder-btn next">
+                                <img class="compz-btn-ico datastats-ico datastats-sortorder-ico next" src="assets/fe-base-sortorder-next.png">
+                              </ion-button>
+                            </div>
+                            <div class="fe-base-dir-datastats sortdir-wrapper">
+                              <ion-button (click)="fileExpFns('order',{bdir:'video',type:'dir',value:'toggle'})" class="compz-btn datastats-btn datastats-sortdir-btn asc">
+                                <img *ngIf="appSStates.feItemOrder.video.dir==='asc'" class="compz-btn-ico datastats-ico datastats-sortdir-ico desc" src="assets/fe-base-sortdir-asc.png">
+                                <img *ngIf="appSStates.feItemOrder.video.dir==='desc'" class="compz-btn-ico datastats-ico datastats-sortdir-ico asc" src="assets/fe-base-sortdir-desc.png">
+                              </ion-button>
+                            </div>
+                          </ion-col>
+                          <ion-col size="4" class="fe-base-dir-datastats-col video order-col">
+                            <div class="fe-base-dir-datastats-inner-wrapper video">
+                              <div class="fe-dstats-count-wrap video">
+                                <span class="fe-ds-data files">{{appSStates.feDataStats.video.count.file}}</span><span class="fe-ds-label count-in">-</span><span class="fe-ds-data dirs">{{appSStates.feDataStats.video.count.dir}}</span>
+                              </div>
+                              <div class="fe-ds-sep bg">|</div>
+                              <div class="fe-dstats-size-wrap video"><span class="fe-ds-data size no">{{appSStates.feDataStats.video.size.no}}</span><span class="fe-ds-data size suffix">{{appSStates.feDataStats.video.size.suffix}}</span></div>
+                            </div>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </div>
+                    <div *ngIf="appSStates.feTreeVideo.children.length<1&&appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]" class="compz-fe-noitems video-depth1">
+                      <div class="fe-nilfiles inner-wrapper">
+                        <div class="compz-fe-nofiles-txt">No Video Files</div>
+                        <ion-button (click)="fileExpFns('addfile',{bdir:'video'})" class="compz-btn compz-fe-empty-add-files-btn">
+                          <img src="assets/home-player-playlist-addfiles-ico.png" class="compz-btn-ico compz-fe-empty-add-files-btn-ico">
+                        </ion-button>
+                      </div>
+                    </div>
+                    <!-- LEVEL 1 --------------------------------->
+                    <div (mouseleave)="feListMouseLeave()" [ngClass]="{'fe-arrangewin-combined-block':appSStates.feArrangeWin==='combined','fe-arrangewin-equal-block':appSStates.feArrangeWin==='equal'}" [ngStyle]="{'max-height':appSStates.feArrangeWin==='equal'?appSStates.feEqualWinMax:'unset'}" class="compz-fe-mainlist-wrapper mainlist-video-wrapper">
+                      <ul *ngIf="appSStates.feTreeVideo.children&&appSStates.feDirVis.video[this.appSStates.feTreeVideo.path]&&!appSStates.feSearch.feSearchInProg" class="compz-fe-item-list video-depth1 coredirlist">
+                        <li *ngFor="let feVI1 of appSStates.feTreeVideo.children; index as v1i" class="compz-fe-file-item video-depth1 li-fe-i-{{v1i}}">
+                          <div class="fe-i-wrap video-depth-1 fe-i-wrap-{{v1i}}">
+                            <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&feVI1.type==='directory'&&appSStates.feSearch.feGhostDirs&&appSStates.feSearch.feGhostDirs[feVI1.path]&&appSStates.feSearch.feGhostDirs[feVI1.path].show&&(!appSStates.feSearch.feSearchMatches[feVI1.path]||appSStates.feSearch.filterData.feFilterOut.folder.hide)" class="fe-ghost-absolute-wrapper">
+                              <div class="fe-searchhiddenfolder-divider-header-wrapper ghost-depth-1">
+                                <div class="fe-searchhiddenfolder-divider-header path-txt ghost-depth-1">
+                                  <img src="assets/fe-base-search-ghostdir-video.png" class="fe-ghostpath-baseico video">
+                                  <div *ngFor="let feGP1 of appSStates.feSearch.feGhostDirs[feVI1.path].label; index as gp1" class="fe-ghostpath ghost-depth-1 gp1-{{gp1}}">
+                                    <img class="ghostpath-ico gpdir-arrow-ico gp1-ico-{{gp1}}" src="assets/fe-base-search-ghostdirarrow.png">
+                                    <div class="gpdir-dirtxt gp1-txt-{{gp1}}">{{feGP1}}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="fe-item-header-mevent-wrapper depth1" (contextmenu)="feItemMouseEvents('cm',feVI1)" (mouseenter)="feItemMouseEvents('me',feVI1)" (mouseleave)="feItemMouseEvents('ml',feVI1)" (click)="feItemMouseEvents('click',feVI1)" [ngClass]="{'feitem-hover':feItemHovered===feVI1.path,'fe-item-select':feItemSelected===feVI1.path,'feitem-searchhidden':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&(!appSStates.feSearch.feSearchMatches[feVI1.path]||(feVI1.type==='file'&&(appSStates.feSearch.filterData.feFilterOut[feVI1.extension]['hide'])||(feVI1.type==='file'&&appSStates.feSearch.filterData.feFilterOut['file']['hide']))||(feVI1.type==='directory'&&appSStates.feSearch.filterData.feFilterOut.folder.hide))}">
+                              <!-- isFile -->
+                              <div *ngIf="feVI1.type==='file'" class="fe-i-head fe-i-head-{{v1i}} video-file-d1">
+                                <div class="fei-file-head-wrapper fei-file-headwrap-{{v1i}}">
+                                  <div class="fe-i-file-ico-wrapper"><img class="fe-ico file default" src="assets/fe-file-default.png"></div>
+                                  <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{v1i}}">
+                                    <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feVI1.path,'fedidrename':appSStates.feRename.feDidRename===feVI1.path}" class="fe-i-filename-txt fe-i-filename-{{v1i}}">{{feVI1.name}}</div>
+                                    <input ngModel #rnInputVideoLvl1File value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputVideoLvl1File.value)" (focus)="feRenameEvent('focus',$event,rnInputVideoLvl1File.value)" (blur)="feRenameEvent('blur',$event,rnInputVideoLvl1File.value)" (keydown)="feRenameEvent('keydown',$event,rnInputVideoLvl1File.value)" (keyup)="feRenameEvent('keyup',$event,rnInputVideoLvl1File.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feVI1.path}" class="fe-i-rename-input fe-i-rename-vl1i{{v1i}}">
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- isFolder -->
+                              <div *ngIf="feVI1.type==='directory'" class="fe-i-head fe-i-head-{{v1i}} video-directory-d1">
+                                <!-- hasChild -->
+                                <div *ngIf="feVI1.children&&feVI1.children.length>0" class="fei-dir-haschildren-head-wrapper fei-dir-haschild-headwrap-{{v1i}}">
+                                  <div (click)="fileExpFns('toggledir',{bdir:'video',path:feVI1.path})" class="fe-i-showhide-ico fe-i-showhide-ico-{{v1i}}">
+                                    <img *ngIf="appSStates.feDirVis.video[feVI1.path]" class="fe-ico showhidearrow showing" src="assets/fe-base-arrow-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.video[feVI1.path]" class="fe-ico showhidearrow hiding" src="assets/fe-base-arrow-close.png">
+                                  </div>
+                                  <div class="fe-i-fileext-ico fe-i-fileext-ico-{{v1i}}">
+                                    <img *ngIf="appSStates.feDirVis.video[feVI1.path]" class="fe-ico dir dir-opened" src="assets/fe-dir-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.video[feVI1.path]" class="fe-ico dir dir-closed" src="assets/fe-dir-closed.png">
+                                  </div>
+                                  <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{v1i}}">
+                                    <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feVI1.path,'fedidrename':appSStates.feRename.feDidRename===feVI1.path}" class="fe-i-filename-txt fe-i-filename-{{v1i}}">{{feVI1.name}}</div>
+                                    <input ngModel #rnInputVideoLvl1DirC value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputVideoLvl1DirC.value)" (focus)="feRenameEvent('focus',$event,rnInputVideoLvl1DirC.value)" (blur)="feRenameEvent('blur',$event,rnInputVideoLvl1DirC.value)" (keydown)="feRenameEvent('keydown',$event,rnInputVideoLvl1DirC.value)" (keyup)="feRenameEvent('keyup',$event,rnInputVideoLvl1DirC.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feVI1.path}" class="fe-i-rename-input fe-i-rename-vl1i{{v1i}}">
+                                  </div>
+                                  <div *ngIf="feVI1.children&&feVI1.children.length>0" class="fe-i-dircount">({{feVI1.children.length}})</div>
+                                </div>
+                                <!-- isEmpty -->
+                                <div *ngIf="!feVI1.children||(feVI1.children&&feVI1.children.length<1)" class="fei-dir-isempty-head-wrapper fei-dir-isempty-headwrap-{{v1i}}">
+                                  <div (click)="fileExpFns('toggledir',{bdir:'video',path:feVI1.path})" class="fe-i-showhide-ico fe-i-showhide-ico-{{v1i}}">
+                                    <img *ngIf="appSStates.feDirVis.video[feVI1.path]" class="fe-ico showhidearrow showing empty" src="assets/fe-base-arrow-empty-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.video[feVI1.path]" class="fe-ico showhidearrow hiding empty" src="assets/fe-base-arrow-empty-closed.png">
+                                  </div>
+                                  <div class="fe-i-fileext-ico fe-i-fileext-ico-{{v1i}}">
+                                    <img *ngIf="appSStates.feDirVis.video[feVI1.path]" class="fe-ico dir dir-open empty" src="assets/fe-dir-empty-open.png">
+                                    <img *ngIf="!appSStates.feDirVis.video[feVI1.path]" class="fe-ico dir dir-closed empty" src="assets/fe-dir-empty-closed.png">
+                                  </div>
+                                  <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{v1i}}">
+                                    <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feVI1.path,'fedidrename':appSStates.feRename.feDidRename===feVI1.path}" class="fe-i-filename-txt fe-i-filename-{{v1i}}">{{feVI1.name}}</div>
+                                    <input ngModel #rnInputVideoLvl1DirE value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputVideoLvl1DirE.value)" (focus)="feRenameEvent('focus',$event,rnInputVideoLvl1DirE.value)" (blur)="feRenameEvent('blur',$event,rnInputVideoLvl1DirE.value)" (keydown)="feRenameEvent('keydown',$event,rnInputVideoLvl1DirE.value)" (keyup)="feRenameEvent('keyup',$event,rnInputVideoLvl1DirE.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feVI1.path}" class="fe-i-rename-input fe-i-rename-vl1i{{v1i}}">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- LEVEL 2 --------------------------------->
+                            <div *ngIf="(!feVI1.children||feVI1.children&&feVI1.children.length<1)&&appSStates.feDirVis.video[feVI1.path]" class="compz-fe-noitems video-depth2">No Video Files</div>
+                            <ul *ngIf="feVI1.children&&feVI1.children.length>0&&appSStates.feDirVis.video[feVI1.path]" class="compz-fe-item-list video-depth2" [ngClass]="{'searchpad':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                              <li *ngFor="let feVI2 of feVI1.children; index as v2i" class="compz-fe-file-item li-fe-i-{{v2i}} video-depth2" [ngClass]="{'searchpaddingoff':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                                <div class="fe-i-wrap video-depth-2 fe-i-wrap-{{v2i}}">
+                                  <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&feVI2.type==='directory'&&appSStates.feSearch.feGhostDirs&&appSStates.feSearch.feGhostDirs[feVI2.path].show&&(!appSStates.feSearch.feSearchMatches[feVI2.path]||appSStates.feSearch.filterData.feFilterOut.folder.hide)" class="fe-ghost-absolute-wrapper">
+                                    <div class="fe-searchhiddenfolder-divider-header-wrapper ghost-depth-2">
+                                      <div class="fe-searchhiddenfolder-divider-header path-txt ghost-depth-2">
+                                        <img src="assets/fe-base-search-ghostdir-video.png" class="fe-ghostpath-baseico video">
+                                        <div *ngFor="let feGP2 of appSStates.feSearch.feGhostDirs[feVI2.path].label; index as gp2" class="fe-ghostpath ghost-depth-2 gp1-{{gp2}}">
+                                          <img class="ghostpath-ico gpdir-arrow-ico gp2-ico-{{gp2}}" src="assets/fe-base-search-ghostdirarrow.png">
+                                          <div class="gpdir-dirtxt gp2-txt-{{gp2}}">{{feGP2}}</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="fe-item-header-mevent-wrapper depth2" (contextmenu)="feItemMouseEvents('cm',feVI2)" (mouseenter)="feItemMouseEvents('me',feVI2)" (mouseleave)="feItemMouseEvents('ml',feVI2)" (click)="feItemMouseEvents('click',feVI2)" [ngClass]="{'feitem-hover':feItemHovered===feVI2.path,'fe-item-select':feItemSelected===feVI2.path,'feitem-searchhidden':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&(!appSStates.feSearch.feSearchMatches[feVI2.path]||(feVI2.type==='file'&&(appSStates.feSearch.filterData.feFilterOut[feVI2.extension]['hide'])||(feVI2.type==='file'&&appSStates.feSearch.filterData.feFilterOut['file']['hide']))||(feVI2.type==='directory'&&appSStates.feSearch.filterData.feFilterOut.folder.hide))}">
+                                    <!-- isFile -->
+                                    <div *ngIf="feVI2.type==='file'" class="fe-i-head fe-i-head-{{v2i}} video-file-d2">
+                                      <div class="fei-file-head-wrapper fei-file-headwrap-{{v2i}}">
+                                        <div class="fe-i-file-ico-wrapper"><img class="fe-ico file default" src="assets/fe-file-default.png"></div>
+                                        <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{v2i}}">
+                                          <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feVI2.path,'fedidrename':appSStates.feRename.feDidRename===feVI2.path}" class="fe-i-filename-txt fe-i-filename-{{v2i}}">{{feVI2.name}}</div>
+                                          <input ngModel #rnInputVideoLvl2File value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputVideoLvl2File.value)" (focus)="feRenameEvent('focus',$event,rnInputVideoLvl2File.value)" (blur)="feRenameEvent('blur',$event,rnInputVideoLvl2File.value)" (keydown)="feRenameEvent('keydown',$event,rnInputVideoLvl2File.value)" (keyup)="feRenameEvent('keyup',$event,rnInputVideoLvl2File.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feVI2.path}" class="fe-i-rename-input fe-i-rename-vl2i{{v2i}}">
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- isFolder -->
+                                    <div *ngIf="feVI2.type==='directory'" class="fe-i-head fe-i-head-{{v2i}} video-directory-d2">
+                                      <!-- hasChild -->
+                                      <div *ngIf="feVI2.children&&feVI2.children.length>0" class="fei-dir-haschildren-head-wrapper fei-dir-haschild-headwrap-{{v2i}}">
+                                        <div (click)="fileExpFns('toggledir',{bdir:'video',path:feVI2.path})" class="fe-i-showhide-ico fe-i-showhide-ico-{{v2i}}">
+                                          <img *ngIf="appSStates.feDirVis.video[feVI2.path]" class="fe-ico showhidearrow showing" src="assets/fe-base-arrow-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.video[feVI2.path]" class="fe-ico showhidearrow hiding" src="assets/fe-base-arrow-close.png">
+                                        </div>
+                                        <div class="fe-i-fileext-ico fe-i-fileext-ico-{{v2i}}">
+                                          <img *ngIf="appSStates.feDirVis.video[feVI2.path]" class="fe-ico dir dir-opened" src="assets/fe-dir-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.video[feVI2.path]" class="fe-ico dir dir-closed" src="assets/fe-dir-closed.png">
+                                        </div>
+                                        <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{v2i}}">
+                                          <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feVI2.path,'fedidrename':appSStates.feRename.feDidRename===feVI2.path}" class="fe-i-filename-txt fe-i-filename-{{v2i}}">{{feVI2.name}}</div>
+                                          <input ngModel #rnInputVideoLvl2DirC value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputVideoLvl2DirC.value)" (focus)="feRenameEvent('focus',$event,rnInputVideoLvl2DirC.value)" (blur)="feRenameEvent('blur',$event,rnInputVideoLvl2DirC.value)" (keydown)="feRenameEvent('keydown',$event,rnInputVideoLvl2DirC.value)" (keyup)="feRenameEvent('keyup',$event,rnInputVideoLvl2DirC.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feVI2.path}" class="fe-i-rename-input fe-i-rename-vl2i{{v2i}}">
+                                        </div>
+                                        <div *ngIf="feVI2.children&&feVI2.children.length>0" class="fe-i-dircount">({{feVI2.children.length}})</div>
+                                      </div>
+                                      <!-- isEmpty -->
+                                      <div *ngIf="!feVI2.children||(feVI2.children&&feVI2.children.length<1)" class="fei-dir-isempty-head-wrapper fei-dir-isempty-headwrap-{{v2i}}">
+                                        <div class="fe-i-showhide-ico fe-i-showhide-ico-{{v2i}}">
+                                          <img *ngIf="appSStates.feDirVis.video[feVI2.path]" class="fe-ico showhidearrow showing empty" src="assets/fe-base-arrow-empty-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.video[feVI2.path]" class="fe-ico showhidearrow hiding empty" src="assets/fe-base-arrow-empty-closed.png">
+                                        </div>
+                                        <div class="fe-i-fileext-ico fe-i-fileext-ico-{{v2i}}">
+                                          <img *ngIf="appSStates.feDirVis.video[feVI2.path]" class="fe-ico dir dir-open empty" src="assets/fe-dir-empty-open.png">
+                                          <img *ngIf="!appSStates.feDirVis.video[feVI2.path]" class="fe-ico dir dir-closed empty" src="assets/fe-dir-empty-closed.png">
+                                        </div>
+                                        <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{v2i}}">
+                                          <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feVI2.path,'fedidrename':appSStates.feRename.feDidRename===feVI2.path}" class="fe-i-filename-txt fe-i-filename-{{v2i}}">{{feVI2.name}}</div>
+                                          <input ngModel #rnInputVideoLvl2DirE value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputVideoLvl2DirE.value)" (focus)="feRenameEvent('focus',$event,rnInputVideoLvl2DirE.value)" (blur)="feRenameEvent('blur',$event,rnInputVideoLvl2DirE.value)" (keydown)="feRenameEvent('keydown',$event,rnInputVideoLvl2DirE.value)" (keyup)="feRenameEvent('keyup',$event,rnInputVideoLvl2DirE.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feVI2.path}" class="fe-i-rename-input fe-i-rename-vl2i{{v2i}}">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- LEVEL 3 --------------------------------->
+                                  <div *ngIf="(!feVI2.children||feVI2.children&&feVI2.children.length<1)&&appSStates.feDirVis.video[feVI2.path]" class="compz-fe-noitems video-depth3">No Video Files</div>
+                                  <ul *ngIf="feVI2.children&&feVI2.children.length>0&&appSStates.feDirVis.video[feVI2.path]" class="compz-fe-item-list video-depth3" [ngClass]="{'searchpad':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                                    <li *ngFor="let feVI3 of feVI2.children; index as v3i" class="compz-fe-file-item li-fe-i-{{v3i}} video-depth3" [ngClass]="{'searchpaddingoff':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null}">
+                                      <div class="fe-i-wrap video-depth-3 fe-i-wrap-{{v3i}}">
+                                        <div *ngIf="appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&feVI3.type==='directory'&&appSStates.feSearch.feGhostDirs&&appSStates.feSearch.feGhostDirs[feVI3.path]&&(!appSStates.feSearch.feSearchMatches[feVI3.path]||appSStates.feSearch.filterData.feFilterOut.folder.hide)" class="fe-ghost-absolute-wrapper">
+                                          <div class="fe-searchhiddenfolder-divider-header-wrapper ghost-depth-3">
+                                            <div class="fe-searchhiddenfolder-divider-header path-txt ghost-depth-3">
+                                              <img src="assets/fe-base-search-ghostdir-video.png" class="fe-ghostpath-baseico video">
+                                              <div *ngFor="let feGP3 of appSStates.feSearch.feGhostDirs[feVI3.path].label; index as gp3" class="fe-ghostpath ghost-depth-3 gp3-{{gp3}}">
+                                                <img class="ghostpath-ico gpdir-arrow-ico gp3-ico-{{gp3}}" src="assets/fe-base-search-ghostdirarrow.png">
+                                                <div class="gpdir-dirtxt gp1-txt-{{gp3}}">{{feGP3}}</div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="fe-item-header-mevent-wrapper depth3" (contextmenu)="feItemMouseEvents('cm',feVI3)" (mouseenter)="feItemMouseEvents('me',feVI3)" (mouseleave)="feItemMouseEvents('ml',feVI3)" (click)="feItemMouseEvents('click',feVI3)" [ngClass]="{'feitem-hover':feItemHovered===feVI3.path,'fe-item-select':feItemSelected===feVI3.path,'feitem-searchhidden':appSStates.feSearch.feShowSearch&&appSStates.feSearch.feSearchVal.length>0&&appSStates.feSearch.feSearchMatches!==null&&(!appSStates.feSearch.feSearchMatches[feVI3.path]||(feVI3.type==='file'&&(appSStates.feSearch.filterData.feFilterOut[feVI3.extension]['hide'])||(feVI3.type==='file'&&appSStates.feSearch.filterData.feFilterOut['file']['hide']))||(feVI3.type==='directory'&&appSStates.feSearch.filterData.feFilterOut.folder.hide))}">
+                                          <!-- isFile -->
+                                          <div *ngIf="feVI3.type==='file'" class="fe-i-head fe-i-head-{{v3i}} video-file-d3">
+                                            <div class="fei-file-head-wrapper fei-file-headwrap-{{v3i}}">
+                                              <div class="fe-i-file-ico-wrapper"><img class="fe-ico file default" src="assets/fe-file-default.png"></div>
+                                              <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{v3i}}">
+                                                <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feVI3.path,'fedidrename':appSStates.feRename.feDidRename===feVI3.path}" class="fe-i-filename-txt fe-i-filename-{{v3i}}">{{feVI3.name}}</div>
+                                                <input ngModel #rnInputVideoLvl3File value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputVideoLvl3File.value)" (focus)="feRenameEvent('focus',$event,rnInputVideoLvl3File.value)" (blur)="feRenameEvent('blur',$event,rnInputVideoLvl3File.value)" (keydown)="feRenameEvent('keydown',$event,rnInputVideoLvl3File.value)" (keyup)="feRenameEvent('keyup',$event,rnInputVideoLvl3File.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feVI3.path}" class="fe-i-rename-input fe-i-rename-vl3i{{v3i}}">
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- isFolder -->
+                                          <div *ngIf="feVI3.type==='directory'" class="fe-i-head fe-i-head-{{v3i}} video-directory-d3">
+                                            <!-- isDepthLimit -->
+                                            <div class="fei-dir-isempty-head-wrapper fei-dir-isempty-headwrap-{{v3i}}">
+                                              <div class="fe-i-showhide-ico fe-i-showhide-ico-{{v3i}}">
+                                                <img class="fe-ico showhidearrow depthlimit" src="assets/fe-base-arrow-empty-closed.png">
+                                              </div>
+                                              <div class="fe-i-fileext-ico fe-i-fileext-ico-{{v3i}}">
+                                                <img class="fe-ico dir dir-open empty" src="assets/fe-dir-toodeep.png">
+                                              </div>
+                                              <div class="fe-i-name fe-i-filenamewrap fe-i-filenamewrap-{{v3i}} toodeepfname">
+                                                <div [ngClass]="{'hide-rename-label':appSStates.feRename.feRenameItem===feVI3.path,'fedidrename':appSStates.feRename.feDidRename===feVI3.path}" class="fe-i-filename-txt fe-i-filename-{{v3i}}">{{feVI3.name}}</div>
+                                                <input ngModel #rnInputVideoLvl3DirE value={{appSStates.feRename.feRenameName}} (change)="feRenameEvent('change',$event,rnInputVideoLvl3DirE.value)" (focus)="feRenameEvent('focus',$event,rnInputVideoLvl3DirE.value)" (blur)="feRenameEvent('blur',$event,rnInputVideoLvl3DirE.value)" (keydown)="feRenameEvent('keydown',$event,rnInputVideoLvl3DirE.value)" (keyup)="feRenameEvent('keyup',$event,rnInputVideoLvl3DirE.value)" [ngClass]="{'show-rename-input':appSStates.feRename.feRenameItem===feVI3.path}" class="fe-i-rename-input fe-i-rename-vl3i{{v3i}}">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!-- ------------------------------------------------------------------------- -->
+  <!-- APP STATUS FOOTER -->
+  <!-- ------------------------------------------------------------------------- -->
+  <div #mscwappstatusbar (mouseenter)="mscwMouseEnter('mscwappstatusbar')" (click)="mscwMouseClick()" id="mscwappstatusbar" class="compz-mainsection-corewrapper statusbar">
+    <ion-grid class="compz-statusfooter-grid">
+      <ion-row class="compz-statusfooter-row">
+        <ion-col size="6" class="compz-statusfooter-col lastaction-col">
+          <img class="compz-statusfooter-ico actionhistory-ico" src="assets/compz-statusbar-action.png">
+          <div *ngIf="appSStates.statusBar.barActionTxt" [ngClass]="{'actionbar-statustxt2history-anim':appSStates.statusBar.barA2HAnim}" class="compz-statusfooter actionbarstatus-txt">{{appSStates.statusBar.barActionTxt}}</div>
+        </ion-col>
+        <ion-col size="3" class="compz-statusfooter-col actionhistory-col">
+          <img class="compz-statusfooter-ico actionhistory-ico" src="assets/compz-statusbar-history.png">
+          <div class="compz-statusfooter actionhistory-txt">
+            <div *ngIf="appSStates.statusBar.barHistoryTxt" class="ahistory-txt">{{appSStates.statusBar.barHistoryTxt}}</div>
+            <div class="ahistory-time">{{appSStates.statusBar.barHATime}}</div>
+          </div>
+        </ion-col>
+        <ion-col size="3" class="compz-statusfooter-col creds-col">
+          <div class="zer0ne-footer-wrap">v0.0.1 © Zer0ne.dev</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+<!-- ------------------------------------------------------------------------- -->
+<!-- APP IS READY WRAPPER -->
+<!-- ------------------------------------------------------------------------- -->
+</div>

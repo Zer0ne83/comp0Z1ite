@@ -1,0 +1,44 @@
+{
+  "asar": false,
+  "directories": {
+    "output": "owen/"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts",
+    "!*.map",
+    "!package.json",
+    "!package-lock.json"
+  ],
+  "extraResources": [
+    {
+      "from": "dist",
+      "to": "app",
+      "filter": [
+        "**/*"
+      ]
+    }
+  ],
+  "win": {
+    "icon": "dist/assets/icons/favicon.256x256.png",
+    "target": [
+      "portable"
+    ]
+  },
+  "build": {
+    "fileAssociations": [{
+      "ext": "json",
+      "name": "JSON",
+      "description": "Comp0Z1te Project File"
+    },
+    {
+      "ext": "0z1",
+      "name": "0Z1",
+      "description": "Comp0Z1te Project File"
+    }
+    ],
+    "nsis": {
+      "perMachine": true
+    }
+  }
+}

@@ -1,0 +1,170 @@
+<div #hcsLauncher (click)="hcsMouseClick()" class="compz-launcher-page launcher-page-main-wrapper outter-wrapper">
+  <div class="compz-launcher-page launcher-page-main-wrapper inner-wrapper">
+    <div class="launcher-page-grid-wrapper">
+      <ion-grid class="compz-grid launcher-page-main-grid">
+        <ion-row class="compz-grid launcher-page-main-row top-row">
+          <ion-col size="3" class="compz-grid launcher-page-main-col topleft">
+          </ion-col>
+          <ion-col size="6" class="compz-grid launcher-page-main-col topmid">
+          </ion-col>
+          <ion-col size="3" class="compz-grid launcher-page-main-col topright">
+          </ion-col>
+        </ion-row>
+        <ion-row class="compz-grid launcher-page-main-middle-row">
+          <ion-col size="3" class="compz-grid launcher-page-main-col midleft"></ion-col>
+          <ion-col size="6" class="compz-grid launcher-page-main-col midmid">
+            <div class="compz-launcher-middlewrap flex-floater">
+              <div class="compz-main-logo-wrapper"><img class="compz-logo-launcher" src="assets/clogo.png"></div>
+              <div class="compz-launcher-maincontent-outterwrapper">
+                <div class="modal-launcher-mainwrapper inner-wrapper">
+                  <ion-grid *ngIf="loadingProj&&isLoadingProj" class="compz-launcher-loadingproj-grid">
+                    <ion-row class="compz-launcher-loadingproj-row text-row">
+                      <ion-col class="compz-launcher-loadingproj-col text-col">
+                        <div [ngStyle]="{'display':loadingProj?'flex':'none'}" class="compz-launcher-loadingproj-text-wrapper">
+                          <div class="loadproj-txt-label">Loading:</div>
+                          <div class="loadproj-txt-name">{{loadingProj.projectName}}</div>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row class="compz-launcher-loadingproj-row progress-row">
+                      <ion-col class="compz-launcher-loadingproj-col progress-col">
+                        <div class="compz-launcher-loadingproj-progress-wrapper">
+                          <ion-progress-bar class="compz-loadingproj-progress-bar" value={{loadPerc}} type="determinate"></ion-progress-bar>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  <ion-grid [ngStyle]="{'display':!isLoadingProj?'block':'none'}" class="compz-launcher-maincontent-grid">
+                    <ion-row class="compz-launcher-maincontent-row projects-title-row">
+                      <ion-col class="compz-launcher-maincontent-col projects-title-col">
+                        <div class="launcher-projects-title-wrapper">
+                          <div class="launcher-projects-title-txt us-none">projects</div>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row class="compz-launcher-maincontent-row header-row">
+                      <ion-col class="compz-launcher-maincontent-col header-col">
+                        <div [ngClass]="{'mlcontent-header-has-no-items-radius':userProjs.length===0}" class="mlcontent-header outter-wrapper">
+                          <div class="mlcontent-header inner-wrapper">
+                            <div [ngStyle]="{'display':launchScreen===1?'flex':'none'}" class="mlcontent-header headerdata">
+                              <div class="mlchd label">found</div>
+                              <div [ngClass]="{'clpc-found':userProjs.length>0,'clpc-nil':userProjs.length===0}" class="mlchd data p-count">{{userProjs.length}}</div>
+                              <div class="mlchd label">saved projects</div>
+                            </div>
+                            <div class="mlcontent-header explorer-btn">
+                              <button (click)="openFE2UserProjects()" type="button" class="mlcontent-btn explorer-btn">
+                                <div class="mlcontent-btn-wrap explorer-btn-wrap">
+                                  <img src="assets/compz-launcher-fileexplorer-ico.png" class="mlcontent-btn-img explorer-btn-img">
+                                </div>
+                              </button>
+                              <button (click)="refreshUserProjects()" type="button" [disabled]="refreshingUPList" class="mlcontent-btn explorer-btn">
+                                <div class="mlcontent-btn-wrap explorer-btn-wrap">
+                                  <img [ngClass]="{'uplist-refresh-ico-spin':refreshingUPList}" src="assets/compz-launcher-refreshprojects-ico.png" class="mlcontent-btn-img explorer-btn-img">
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row class="compz-launcher-maincontent-row projectselect-row">
+                      <ion-col class="compz-launcher-maincontent-row projectselect-col">
+                        <div class="compz-launcher-maincontent-select outter-wrapper">
+                          <div [ngStyle]="{'display':launchScreen===1?'block':'none'}" (mouseenter)="pjListMouseEnter()" (mouseleave)="pjListMouseLeave()" class="waitlistwrap">
+                            <div #hcaProjectList (mouseenter)="hcaMouseEnter('hcaProjectList')" [ngClass]="{'refresh-up-list-dim':refreshingUPList}" class="mlcontent-list inner-wrapper darkscrolls">
+                              <div *ngFor="let uProj of userProjs; let upI=index" id="upid{{upI}}" tabindex="0" (keydown)="selectProjEvents('keydown',$event,upI)" (click)="selectProjEvents('selectUItem',null,upI)" (contextmenu)="selectProjEvents('cm',$event,uProj)" (mouseenter)="selectProjEvents('me',$event,uProj)" class="up-list-item-outter-wrapper" [ngClass]="{'up-selected':selectedProj!==null&&selectedProj.projectName&&selectedProj.projectName===uProj.projectName}">
+                                <div class="up-list-item-inner-wrapper">
+                                  <div class="up-list-item-line1">
+                                    <img class="up-list-item-ico us-none" src="assets/cm-compz-ico.png">
+                                    <div class="up-list-item-name us-none">{{uProj.projectName}}</div>
+                                    <div class="up-list-item-date us-none">{{userProjsData[upI].lastModDateTxt}}</div>
+                                  </div>
+                                  <div class="up-list-item-line2"><div class="up-list-item-path us-none">{{uProj.projectDirPath}}</div></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div [ngClass]="{'refresh-spinner-in':refreshingUPList}" class="up-list-refreshing-outter-wrapper">
+                              <div class="up-list-refreshing-inner-wrapper">
+                                <ion-spinner duration="500" class="up-list-refreshing-spinner" name="dots"></ion-spinner>
+                              </div>
+                            </div>
+                          </div>
+                          <div [ngStyle]="{'display':launchScreen===2?'block':'none'}" class="clmc-select newproject outter-wrapper">
+                            <div class="clml-select newproject inner-wrapper">
+                              <div class="np-input-label">New Project Name:</div>
+                              <div class="np-input-valindic-clrgenbtn-wrapper">
+                                <input tabindex="0" #newProjInput type="text" (keydown)="selectProjEvents('keydown',$event,'newProjInput')" (keyup)="selectProjEvents('keyup',$event,newProjInput.value)" class="new-project-input">
+                                <div class="np-input-valindic-wrapper">
+                                  <div class="np-input-valindic-val">
+                                    <img [ngStyle]="{'display':newProjValid!==null&&newProjValid===true?'block':'none'}" src="assets/compz-launcher-npfnval-true-ico.png" class="val-indic-ico true">
+                                    <img [ngStyle]="{'display':newProjValid!==null&&newProjValid===false?'block':'none'}" src="assets/compz-launcher-npfnval-false-ico.png" class="val-indic-ico false">
+                                  </div>
+                                </div>
+                                <div class="np-input-clrgenbtn-wrapper">
+                                  <button tabindex="0" (keydown)="selectProjEvents('keydown',$event,'clrBtn')" (click)="selectProjEvents('clear',null,null)" class="clrgenbtn clr-btn us-none">clr</button>
+                                  <button tabindex="0" (keydown)="selectProjEvents('keydown',$event,'genBtn')" (click)="selectProjEvents('gen',null,null)" class="clrgenbtn gen-btn us-none">gen</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row class="compz-launcher-maincontent-row footer-row">
+                      <ion-col class="compz-launcher-maincontent-row footer-col">
+                        <div class="modal-launcher-btnfooter outter-wrapper">
+                          <div class="modal-launcher-btnfooter inner-wrapper">
+                            <div class="modal-launcher-btnfooter btns-wrapper">
+                              <div [ngStyle]="{'display':launchScreen===1?'flex':'none'}" class="btn-set-wrapper newuser-select">
+                                <div class="modal-launcher-btnfooter new-btn-wrapper">
+                                  <button tabindex="0" #newProjBtn (click)="selectProjEvents('newProj',null,null)" (keydown)="selectProjEvents('keydown',$event,'newProjBtn')" class="mlf-btn newproject-btn">
+                                    <img class="mlf-btn-ico newproject-btn-ico us-none" src="assets/compz-launcher-newproject-ico.png">
+                                    <div class="mlf-btn-txt newproject-btn-txt us-none">new project</div>
+                                  </button>
+                                </div>
+                                <div [ngStyle]="{'cursor':!selectedProj?'not-allowed':'pointer'}" class="modal-launcher-btnfooter open-btn-wrapper">
+                                  <button tabindex="0" #openProjBtn type="button" disabled="true" (click)="selectProjEvents('openProj',null,null)" (keydown)="selectProjEvents('keydown',$event,'openProjBtn')" class="mlf-btn mlf-go-hl openproject-btn">
+                                    <img class="mlf-btn-ico openproject-btn-ico us-none" src="assets/compz-launcher-openproject-ico.png">
+                                    <div class="mlf-btn-txt openproject-btn-txt us-none">open project</div>
+                                  </button>
+                                </div>
+                              </div>
+                              <div [ngStyle]="{'display':launchScreen===2?'flex':'none'}" class="btn-set-wrapper backstart-select">
+                                <div class="modal-launcher-btnfooter back-btn-wrapper">
+                                  <button tabindex="0" #back2ProjsBtn (click)="selectProjEvents('back2Projs',null,null)" (keydown)="selectProjEvents('keydown',$event,'back2ProjsBtn')" class="mlf-btn backproject-btn">
+                                    <img class="mlf-btn-ico backproject-btn-ico us-none" src="assets/compz-launcher-back2projects-ico.png">
+                                    <div class="mlf-btn-txt backproject-btn-txt us-none">projects</div>
+                                  </button>
+                                </div>
+                                <div [ngStyle]="{'cursor':!newProjValid?'not-allowed':'pointer'}" class="modal-launcher-btnfooter start-btn-wrapper">
+                                  <button tabindex="0" #startProjBtn type="button" disabled="true" (click)="selectProjEvents('startProj',null,null)" (keydown)="selectProjEvents('keydown',$event,'startProjBtn')" class="mlf-btn mlf-go-hl startproject-btn">
+                                    <img class="mlf-btn-ico startproject-btn-ico us-none" src="assets/compz-launcher-startproject-ico.png">
+                                    <div class="mlf-btn-txt startproject-btn-txt us-none">start new</div>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="3" class="compz-grid launcher-page-main-col midright">
+          </ion-col>
+        </ion-row>
+        <ion-row class="compz-grid launcher-page-main-row bottom-row">
+          <ion-col size="3" class="compz-grid launcher-page-main-col botleft">
+          </ion-col>
+          <ion-col size="6" class="compz-grid launcher-page-main-col botmid">
+          </ion-col>
+          <ion-col size="3" class="compz-grid launcher-page-main-col botright">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</div>
